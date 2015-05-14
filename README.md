@@ -1,2 +1,2 @@
 # node-collection
-A powerful collection Array, List, Stack, Queue, FixedQueue library for Javascript, node.js
+A powerful collection Array, List, Stack, Queue, FixedQueue with power LINQ for Javascript, node.js
