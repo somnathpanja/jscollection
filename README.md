@@ -24,10 +24,11 @@ Adding Item to List
         
 Lets add some objects
 
-    var list = new List([{name:"Student1", marks: 80, class: 1}, 
-                         {name:"Student2", marks: 91, class: 1}, 
-                         {name:"Student3", marks: 50, class: 2},
-                         {name:"Student3", marks: 50, class: 2}
+    // Lists of students as an example
+    var list = new List([{name:"Jhon", marks: 80, class: 1}, 
+                         {name:"Micle", marks: 91, class: 1}, 
+                         {name:"Ritu", marks: 50, class: 2},
+                         {name:"Sonia", marks: 50, class: 2}
                          ]);
     
 Perform select query by key
