@@ -11,10 +11,12 @@ A powerful collection Array, List, Stack, Queue, FixedQueue with power of LINQ f
   ----
   var list = new List();
   list.addRange([1, 2, 3, 4]);
+  ----
+  
 
 ## Tests
 
-  npm test
+  node test/test.js
 
 ## Contributing
 
