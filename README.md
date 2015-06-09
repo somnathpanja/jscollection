@@ -8,11 +8,11 @@ A simple and powerful generic collection (List, Stack, Queue, FixedQueue) includ
 ## How to use
 
 Creating list
-
+'''js
     var list = new List([1, 2, 3, 4]); OR
     var list = new List();
     list.addRange([1, 2, 3, 4]);
-
+'''
 Adding Item to List
 
     var list = new List();
@@ -23,7 +23,10 @@ Adding Item to List
         
 Lets add some objects
 
-    var list = new List([{name:"Student1", marks: 20}, {name:"Student2", marks: 20}, {name:"Student3", marks: 20}]);
+    var list = new List([{name:"Student1", marks: 20}, 
+                         {name:"Student2", marks: 20}, 
+                         {name:"Student3", marks: 20}
+                         ]);
     
 Perform select query by key
 
