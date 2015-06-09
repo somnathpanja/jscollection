@@ -1,5 +1,5 @@
 # jscollection
-A powerful collection Array, List, Stack, Queue, FixedQueue with power of LINQ for Javascript, node.js
+A simple and powerful generic collection (List, Stack, Queue, FixedQueue) including power of LINQ for Javascript, node.js
 
 ## Installation
 
