@@ -8,6 +8,7 @@ A powerful collection Array, List, Stack, Queue, FixedQueue with power of LINQ f
 ## Usage
 
   var list = new List([1, 2, 3, 4]);
+  ----
   or
   var list = new List();
   list.addRange([1, 2, 3, 4]);
