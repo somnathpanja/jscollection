@@ -44,10 +44,12 @@ Perform where query (Select names of the student where markes >= 80)
     
 Perform groupby query (Lets group by class)
 
+    /* According to above data set our result will be creting two groups. 
+       One group where class=1 and another for class=2 */
     var groups = list.groupby('class'}); 
     // OR
     var groups = list.groupby(function(t){return t.class;});
-    // According to above data set our result will be creting two groups. One group where class=1 and another for class=2 
+
 
 ## Tests
 
