@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "test/test.js"
+    "test": "node test/test.js"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,12 @@
     "fixedqueue"
   ],
   "author": "Somnath Panja",
-  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/somnathpanja/jscollection/blob/master/LICENSE"
+    }
+  ],
   "bugs": {
     "url": "https://github.com/somnathpanja/jscollection/issues"
   },
