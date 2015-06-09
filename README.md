@@ -7,7 +7,7 @@ A simple and powerful generic collection (List, Stack, Queue, FixedQueue) includ
 
 ## How to use
 
-Creating list
+####Creating list
 
     var list = new List([1, 2, 3, 4]); 
     // OR
