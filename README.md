@@ -5,13 +5,26 @@ A simple and powerful generic collection (List, Stack, Queue, FixedQueue) includ
 
   npm install jscollection --save
 
-## Usage
+## How to use
 
-  var list = new List([1, 2, 3, 4]);
-  ----
-  var list = new List();
-  list.addRange([1, 2, 3, 4]);
-  ----
+- Creating list
+        var list = new List([1, 2, 3, 4]); OR
+        var list = new List();
+        list.addRange([1, 2, 3, 4]);
+- Adding Item to List
+        var list = new List();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+- Lets add some objects
+        var list = new List([{name:"Student1", marks: 20}, {name:"Student2", marks: 20}, {name:"Student3", marks: 20}]);
+- Perform select query by key
+        var names = list.select("name");
+- Perform select query by selector function
+        var names = list.select(function(t){return t.name;});
+
+
   
 
 ## Tests
