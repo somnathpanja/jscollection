@@ -21,7 +21,7 @@
     "fixedqueue"
   ],
   "author": "Somnath Panja",
-  "licenses": [
+  "license": [
     {
       "type": "MIT",
       "url": "https://github.com/somnathpanja/jscollection/blob/master/LICENSE"
