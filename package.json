@@ -1,0 +1,29 @@
+{
+  "name": "jscollection",
+  "version": "1.0.0",
+  "description": "A powerful collection Array, List, Stack, Queue, FixedQueue with power of LINQ for Javascript, node.js",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/somnathpanja/jscollection.git"
+  },
+  "keywords": [
+    "collection",
+    "list",
+    "stack",
+    "queue",
+    "fixedqueue"
+  ],
+  "author": "Somnath Panja",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/somnathpanja/jscollection/issues"
+  },
+  "homepage": "https://github.com/somnathpanja/jscollection#readme"
+}
