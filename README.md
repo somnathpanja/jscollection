@@ -14,7 +14,7 @@ A simple and powerful generic collection (List, Stack, Queue, FixedQueue) includ
     var list = new List();
     list.addRange([1, 2, 3, 4]);
 
-Adding Item to List
+####Adding Item to List
 
     var list = new List();
     list.add(1);
@@ -22,7 +22,7 @@ Adding Item to List
     list.add(3);
     list.add(4);
         
-Lets add some objects
+####Lets add some objects
 
     // Lists of students as an example
     var list = new List([{name:"Jhon", marks: 80, class: 1}, 
@@ -31,19 +31,19 @@ Lets add some objects
                          {name:"Sonia", marks: 50, class: 2}
                          ]);
     
-Perform select query by key
+####Perform select query by key
 
     var names = list.select("name");
         
-Perform select query by selector function
+####Perform select query by selector function
 
     var names = list.select(function(t){return t.name;});
 
-Perform where query (Select names of the student where markes >= 80)
+####Perform where query (Select names of the student where markes >= 80)
 
     var names = list.where(function(t){return (t.marks >= 80);}).select('name');
     
-Perform groupby query (Lets group by class)
+####Perform groupby query (Lets group by class)
 
     /* According to above data set our result will be creting two groups. 
        One group where class=1 and another for class=2 */
