@@ -27,5 +27,5 @@
  */
 
 (function (module) {
-    module.exports = require('./lib/collections.js');
+    module.exports = require('./src/collections.js');
 })(module);
