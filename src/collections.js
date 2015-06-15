@@ -318,7 +318,7 @@
             this.each(function (item) {
                 list.add(selector(item));
             });
-        } return this;
+        } else return this;
 
         return list;
     };
@@ -339,11 +339,7 @@
             this.each(function (item) {
                 list.addRange(selector(item));
             });
-        } else {
-            this.each(function (item) {
-                list.addRange(selector(item));
-            });
-        }
+        } else return thisC;
 
         return list;
     };
