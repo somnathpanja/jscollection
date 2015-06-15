@@ -310,9 +310,15 @@
     List.prototype.select = function (selector) {
         var thisC = this;
         var list = instanceFactory(thisC);
-        this.each(function (item) {
-            list.add(selector(item));
-        });
+        if((typeof selector === 'string')){
+            this.each(function (item) {
+                list.add(item[selector]);
+            });
+        } else if(selector){
+            this.each(function (item) {
+                list.add(selector(item));
+            });
+        } return this;
 
         return list;
     };
@@ -325,9 +331,19 @@
     List.prototype.selectMulti = function (selector) {
         var thisC = this;
         var list = instanceFactory(thisC);
-        this.each(function (item) {
-            list.addRange(selector(item));
-        });
+        if((typeof selector === 'string')){
+            this.each(function (item) {
+                list.addRange(item[selector]);
+            });
+        } else if(selector) {
+            this.each(function (item) {
+                list.addRange(selector(item));
+            });
+        } else {
+            this.each(function (item) {
+                list.addRange(selector(item));
+            });
+        }
 
         return list;
     };
