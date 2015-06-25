@@ -4,6 +4,34 @@ A simple and powerful generic collection (List, Stack, Queue, FixedQueue) includ
 ## Installation
 
   npm install jscollection
+  
+## List of functions
+
+* add(item)
+* remove(item)
+* removeLast()
+* removeAt(index)
+* toArray()
+* fast()
+* last()
+* count()
+* any()
+* avg()
+* sum()
+* top(count)
+* bottom(count)
+* range(fromIndex,toIndex)
+* each(function)
+* eachReverse(function)
+* eachAsyn(function(item,index,nextCallback){}) 
+* select(selector)
+* selectMulti(selector)
+* where(selector)
+* groupby(selector)
+* orderByAsc(selector)
+* orderByDesc(selector)
+* unique()
+* isList()
 
 ## How to use
 
@@ -30,6 +58,16 @@ A simple and powerful generic collection (List, Stack, Queue, FixedQueue) includ
                          {name:"Ritu", marks: 50, class: 2},
                          {name:"Sonia", marks: 50, class: 2}
                          ]);
+####Removing Item to List using remove(), removeLast(), removeAt() and clear()
+
+    list.remove(item);
+    var removedItem = list.removeLast();    // Removes the last item from collection
+    var removedItem = list.removeAt(index); // Removes an item present at index
+
+####Delete or clear all items from collection using clear()
+
+    list.clear();
+
 ####Traverse a collection using each, eachReverse
 
     list.each(function(item, indexOfItem){
