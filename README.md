@@ -3,7 +3,7 @@ A simple and powerful generic collection (List, Stack, Queue, FixedQueue) includ
 
 ## Installation
 
-  npm install jscollection --save
+  npm install jscollection
 
 ## How to use
 
@@ -64,3 +64,5 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 ## Release History
 
 * 1.0.0 Initial release
+* 1.0.1 Released
+* 1.0.3 Released
