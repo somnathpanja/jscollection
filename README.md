@@ -76,7 +76,7 @@ Quering the collection
 
     list.clear();
 
-####Traverse a collection using each, eachReverse
+####Traversing a collection using each, eachReverse
 
     list.each(function(item, indexOfItem){
         console.log(item.name +':' + item.marks);
