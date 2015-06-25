@@ -7,31 +7,39 @@ A simple and powerful generic collection (List, Stack, Queue, FixedQueue) includ
   
 ## List of functions
 
-* add(item)
-* remove(item)
-* removeLast()
-* removeAt(index)
-* toArray()
-* fast()
-* last()
-* count()
-* any()
-* avg()
-* sum()
-* top(count)
-* bottom(count)
-* range(fromIndex,toIndex)
-* each(function)
-* eachReverse(function)
-* eachAsyn(function(item,index,nextCallback){}) 
-* select(selector)
-* selectMulti(selector)
-* where(selector)
-* groupby(selector)
-* orderByAsc(selector)
-* orderByDesc(selector)
-* unique()
-* isList()
+Basic functions
+
+  * add(item)
+  * remove(item)
+  * removeLast()
+  * removeAt(index)
+  * fast()
+  * last()
+  * count()
+  * any()
+  * avg()
+  * sum()
+  * isList()
+  * toArray()
+
+Traverseing the collection
+
+  * each(function)
+  * eachReverse(function)
+  * eachAsyn(function(item,index,nextCallback){}) 
+
+Quering the collection 
+
+  * select(selector function)
+  * selectMulti(selector function)
+  * where(selector function)
+  * groupby(selector function)
+  * orderByAsc(comparator function)
+  * orderByDesc(comparator function)
+  * unique()
+  * top(count)
+  * bottom(count)
+  * range(fromIndex,toIndex)
 
 ## How to use
 
