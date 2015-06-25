@@ -21,7 +21,7 @@ A simple and powerful generic collection (List, Stack, Queue, FixedQueue) includ
     list.add(2);
     list.add(3);
     list.add(4);
-        
+
 ####Lets add some objects
 
     // Lists of students as an example
@@ -30,8 +30,24 @@ A simple and powerful generic collection (List, Stack, Queue, FixedQueue) includ
                          {name:"Ritu", marks: 50, class: 2},
                          {name:"Sonia", marks: 50, class: 2}
                          ]);
+####Traverse a collection using each, eachReverse
+
+    list.each(function(item, indexOfItem){
+        console.log(item.name +':' + item.marks);
+    });
     
-####Perform select query by key
+     list.eachReverse(function(item, indexOfItem){
+        console.log(item.name +':' + item.marks);
+    });
+    
+####Break the loop while traversing through collection
+
+    list.each(function(item, indexOfItem){
+        console.log(item.name +':' + item.marks);
+        if(indexOfItem == 3) return false; // Returning false will break the loop
+    });
+    
+####Perform select query by key using select
 
     var names = list.select("name");
         
@@ -43,7 +59,7 @@ A simple and powerful generic collection (List, Stack, Queue, FixedQueue) includ
 
     var names = list.where(function(t){return (t.marks >= 80);}).select('name');
     
-####Perform groupby query (Lets group by class)
+####Perform groupby query (Lets group by class) using groupby
 
     /* According to above data set our result will be creting two groups. 
        One group where class=1 and another for class=2 */
