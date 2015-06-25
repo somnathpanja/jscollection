@@ -22,7 +22,7 @@ Basic functions
   * isList()
   * toArray()
 
-Traverseing the collection
+Traversing the collection
 
   * each(function)
   * eachReverse(function)
