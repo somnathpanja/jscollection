@@ -105,7 +105,7 @@ Quering the collection
 
     var names = list.where(function(t){return (t.marks >= 80);}).select('name');
     
-####Perform groupby query (Lets group by class) using groupby
+####Perform groupby query in javascript
 
     /* According to above data set our result will be creting two groups. 
        One group where class=1 and another for class=2 */
