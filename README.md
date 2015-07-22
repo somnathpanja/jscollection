@@ -9,19 +9,18 @@ A simple and powerful generic collection (List, Stack, Queue, FixedQueue) includ
 
 Basic functions
 
-  * add(item) - add an item in collection
-  * addRange(arrayOfItems) - add multiple items in collection
-  * remove(item) - remove an item from collection
-  * removeLast() - remove the last item from collection
-  * removeAt(index) - remove an item at specific index from collection
-  * fast() - get the first item from the collection
-  * last() - get the first item from the collection
-  * count() - get the first item from the collection
-  * any() - get the first item from the collection
-  * avg() - get the first item from the collection
-  * sum() - get the first item from the collection
-  * isList() - check whwther the type of the collection is List
-  * toArray() - collect javascript array from collection
+  * var myList = new List();
+  * myList.add(item)               // Add an item in collection
+  * myList.addRange(arrayOfItems)  // Add multiple items in collection
+  * myList.remove(item)            // Remove an item from collection
+  * myList.removeLast()            // Remove the last item from collection
+  * myList.removeAt(index)         // Remove an item at specific index from collection
+  * myList.first()                 // Get the first item from the collection
+  * myList.last()                  // Get the last item from the collection
+  * myList.count()                 // Get the first item from the collection
+  * myList.any()                   // Get the first item from the collection
+  * myList.avg()                   // Get the first item from the collection
+  * myList.sum()                   // Get the first item from the collection
 
 Traversing the collection
 
