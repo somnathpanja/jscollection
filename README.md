@@ -112,7 +112,18 @@ Quering the collection
     var groups = list.groupby('class'}); 
     // OR
     var groups = list.groupby(function(t){return t.class;});
+    
+#### Execute asyncronus functions one after another
 
+    List.exeAsync(function insertIntomongo(next){
+            // Do operation in mongo
+            next(datareturnedFromMongo); // once you are done call next
+    }, function insertIntoOracle(datareturnedFromMongo, next){
+            // Do operation in oracle
+            next(datareturnedFromOracle); // // once you are done call next
+    }, function onDone(datareturnedFromOracle, next){
+           
+    });
 
 ## Tests
 
