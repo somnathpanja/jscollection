@@ -50,6 +50,20 @@ myList.toArray()               // Collect javaScript array from collection
 </code></pre>
 
 <h3>
+<a id="execute-asyncronus-functions-one-after-another" class="anchor" href="#execute-asyncronus-functions-one-after-another" aria-hidden="true"><span class="octicon octicon-link"></span></a>Execute asyncronus functions one after another</h3>
+
+<pre><code>List.exeAsync(function insertIntomongo(next){
+        // Do operation in mongo
+        next(dataReturnedFromMongo); // once you are done call next
+}, function insertIntoRedis(dataReturnedFromMongo, next){
+        // Do operation in redis
+        next(dataReturnedFromRedis); // // once you are done call next
+}, function onDone(dataReturnedFromRedis, next){
+      // call the final callback here
+});
+</code></pre>
+
+<h3>
 <a id="searching-and-querying-your-collection" class="anchor" href="#searching-and-querying-your-collection" aria-hidden="true"><span class="octicon octicon-link"></span></a>Searching and Querying your Collection</h3>
 
 <pre><code>select(selector function)        // Select items from collection
