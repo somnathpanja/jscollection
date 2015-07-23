@@ -19,10 +19,10 @@ Basic functions
   * myList.removeAt(index)         // Remove an item at specific index from collection also returns the deleted item
   * myList.first()                 // Get the first item from the collection
   * myList.last()                  // Get the last item from the collection
-  * myList.count()                 // Get the first item from the collection
-  * myList.any()                   // Get the first item from the collection
-  * myList.avg()                   // Get the first item from the collection
-  * myList.sum()                   // Get the first item from the collection
+  * myList.count()                 // Get the size of the collection
+  * myList.any()                   // Is there any items present in collection?
+  * myList.avg()                   // Calculate average of values present in collection
+  * myList.sum()                   // Calculate sum of values present in collection
 
 Traversing the collection
 
