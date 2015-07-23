@@ -10,19 +10,19 @@ A simple and powerful generic collection (List, Stack, Queue, FixedQueue) includ
 Basic functions
 
   * var myList = new List();
-  * myList.add(item)                      // Add an item in collection
-  * myList.addRange(arrayOfItems)         // Add multiple items in collection
-  * myList.insertAt(index, item);         // Insert an item at a given position
-  * var retItem = myList.removeAt(index); // Remove an item from a given position
-  * myList.remove(item)                   // Remove an item from collection
-  * myList.removeLast()                   // Remove the last item from collection
-  * myList.removeAt(index)                // Remove an item at specific index from collection
-  * myList.first()                        // Get the first item from the collection
-  * myList.last()                         // Get the last item from the collection
-  * myList.count()                        // Get the first item from the collection
-  * myList.any()                          // Get the first item from the collection
-  * myList.avg()                          // Get the first item from the collection
-  * myList.sum()                          // Get the first item from the collection
+  * myList.add(item)               // Add an item in collection
+  * myList.addRange(arrayOfItems)  // Add multiple items in collection
+  * myList.insertAt(index, item);  // Insert an item at a given position
+  * myList.removeAt(index);        // Remove an item from a given position also returns the deleted item
+  * myList.remove(item)            // Remove an item from collection also returns the deleted item
+  * myList.removeLast()            // Remove the last item from collection also returns the deleted item
+  * myList.removeAt(index)         // Remove an item at specific index from collection also returns the deleted item
+  * myList.first()                 // Get the first item from the collection
+  * myList.last()                  // Get the last item from the collection
+  * myList.count()                 // Get the first item from the collection
+  * myList.any()                   // Get the first item from the collection
+  * myList.avg()                   // Get the first item from the collection
+  * myList.sum()                   // Get the first item from the collection
 
 Traversing the collection
 
