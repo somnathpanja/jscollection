@@ -43,16 +43,22 @@ myList.removeLast()            // Remove the last item from collection also retu
 myList.removeAt(index)         // Remove an item at specific index from collection also returns the deleted item
 myList.first()                 // Get the first item from the collection
 myList.last()                  // Get the last item from the collection
-myList.count()                 // Get the first item from the collection
-myList.any()                   // Get the first item from the collection
-myList.avg()                   // Get the first item from the collection
-myList.sum()                   // Get the first item from the collection
+myList.count()                 // Get the size of the collection
+myList.any()                   // Is there any items present in collection?
+myList.avg()                   // Calculate average of values present in collection
+myList.sum()                   // Calculate sum of values present in collection
 </code></pre>
 
 <h3>
 <a id="traverse-the-collection-asynchronously" class="anchor" href="#traverse-the-collection-asynchronously" aria-hidden="true"><span class="octicon octicon-link"></span></a>Traverse the collection asynchronously</h3>
 
-<pre><code>eachAsyn(function(item,index,nextCallback){}) - travarse the collection and perform asynchronous operations for each
+<pre><code>eachAsyn(function(item,index,nextCallback){}) - traverse the collection and perform asynchronous operations for each
+Example:
+myDataList.eachAsync(function(item, index, next) {
+   insertIntoMongoDb(item, function(){
+        next();  
+   });
+});
 </code></pre>
 
 <h3>
