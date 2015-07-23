@@ -39,6 +39,17 @@
         }
     };
 
+    List.extend = function (array) {
+        if (!Array.isArray(array)) throw "Only array can be extended";
+
+        var proto = JSON.stringify(List.prototype);
+        List.each(Object.keys(List.prototype), function (key) {
+            if (List.prototype.hasOwnProperty(key)) {
+                array[key] = List.prototype[key];
+            }
+        });
+    };
+
     List.prototype = [];
     List.constructor = List;
 
@@ -94,6 +105,14 @@
      * @description Remove the last item
      * @returns {*}
      */
+    List.prototype.removeFirst = function () {
+        return (this.length > 0) ? this.removeAt(0) : undefined;
+    };
+
+    /**
+     * @description Remove the last item
+     * @returns {*}
+     */
     List.prototype.removeLast = function () {
         return (this.length > 0) ? this.removeAt(this.length - 1) : undefined;
     };
@@ -138,8 +157,8 @@
      * @param index
      * @private
      */
-    List.prototype._doIndexAccess = function(index){
-        if(index < 0 || index >= this.length)
+    List.prototype._doIndexAccess = function (index) {
+        if (index < 0 || index >= this.length)
             throw new Error("Index out of range: " + index + "/" + this.length);
     };
 
@@ -151,7 +170,7 @@
     List.prototype.first = function () {
         this._doIndexAccess();
 
-        if(this.length > 0)
+        if (this.length > 0)
             return this[0];
     };
 
@@ -276,7 +295,7 @@
      */
     List.prototype.sum = function (selector) {
         var sum = 0, i;
-        if((typeof selector === 'string')){
+        if ((typeof selector === 'string')) {
             for (i = 0; i < this.length; i++) {
                 sum += Number(this[i][selector]);
             }
@@ -310,11 +329,11 @@
     List.prototype.select = function (selector) {
         var thisC = this;
         var list = instanceFactory(thisC);
-        if((typeof selector === 'string')){
+        if ((typeof selector === 'string')) {
             this.each(function (item) {
                 list.add(item[selector]);
             });
-        } else if(selector){
+        } else if (selector) {
             this.each(function (item) {
                 list.add(selector(item));
             });
@@ -331,11 +350,11 @@
     List.prototype.selectMulti = function (selector) {
         var thisC = this;
         var list = instanceFactory(thisC);
-        if((typeof selector === 'string')){
+        if ((typeof selector === 'string')) {
             this.each(function (item) {
                 list.addRange(item[selector]);
             });
-        } else if(selector) {
+        } else if (selector) {
             this.each(function (item) {
                 list.addRange(selector(item));
             });
@@ -369,7 +388,9 @@
     List.prototype.orderByAsc = function (keySelector) {
         var thisC = this;
         var list = instanceFactory(thisC);
-        list.sort(function (a, b) { return keySelector(a) - keySelector(b);});
+        list.sort(function (a, b) {
+            return keySelector(a) - keySelector(b);
+        });
         return list;
     };
 
@@ -381,7 +402,9 @@
     List.prototype.orderByDesc = function (keySelector) {
         var thisC = this;
         var list = instanceFactory(thisC);
-        list.sort(function (a, b) { return keySelector(b) - keySelector(a);});
+        list.sort(function (a, b) {
+            return keySelector(b) - keySelector(a);
+        });
         return list;
     };
 
@@ -433,8 +456,17 @@
      * @param delegate function pointer to be called in loop params: (item, index, continueCallback)
      * @param onDone function will be called on loop end or any error occurred
      */
-    List.prototype.eachAsyn = function (delegate, onDone) {
-        List.eachAsyn(this, delegate, onDone);
+    List.prototype.eachAsync = function (delegate, onDone) {
+        List.eachAsync(this, delegate, onDone);
+    };
+
+    /**
+     * @description Prints in console
+     */
+    List.prototype.printInConsole = function () {
+        List.each(this, function(item, idx){
+            console.log(idx + ": " + JSON.stringify(item));
+        });
     };
 
     /*********************---------------------********************/
@@ -473,7 +505,7 @@
      * @param delegate function pointer to be called in loop params: (item, index, continueCallback)
      * @param onDone function will be called on loop end or any error occurred
      */
-    List.eachAsyn = function (array, delegate, onDone) {
+    List.eachAsync = function (array, delegate, onDone) {
         try {
             var idx = -1;
             var continueLoop = function () {
@@ -503,7 +535,7 @@
      * @param delegate function pointer to be called in loop params: (item, index, continueCallback)
      * @param onDone function will be called on loop end or any error occurred
      */
-    List.eachAsynReverse = function (array, delegate, onDone) {
+    List.eachAsyncReverse = function (array, delegate, onDone) {
         try {
             var idx = array.length;
             var continueLoop = function () {
@@ -534,7 +566,7 @@
      * @onDone function will be called on loop end or any error occurred
      * @param cb
      */
-    List.loopAsyn = function (noOfIteration, delegate, onDone) {
+    List.loopAsync = function (noOfIteration, delegate, onDone) {
         try {
             var idx = -1;
             var continueLoop = function () {
@@ -581,6 +613,24 @@
         };
 
         continueLoop();
+    };
+
+    /**
+     * returns list of values extracted from array or object property values
+     * @example List.exeAsync(f1, f2, f3);
+     */
+    List.toList = function (obj) {
+        if(Array.isArray(obj))
+            return new List(obj);
+        else {
+            var list = new List();
+            Object.keys(obj).forEach(function(key){
+                if(obj.hasOwnProperty(key)){
+                    list.add(obj[key]);
+                }
+            });
+            return list;
+        }
     };
 
     /*********************---------------------********************/
@@ -680,12 +730,12 @@
             return new Queue();
         } else if (instance instanceof FixedQueue) {
             return new FixedQueue(instance._maxCount);
-        }
+        } else return new List();
     };
 
     var Collections = {
-        List      : List,
-        Queue     : Queue,
+        List: List,
+        Queue: Queue,
         FixedQueue: FixedQueue
     };
 

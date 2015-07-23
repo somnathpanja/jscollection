@@ -61,9 +61,9 @@
         var testGroupName = args.callee.caller.name.toString();
         var testCaseName = args.callee.name.toString();
 
-        var print = testGroupName + ' -> ' + testCaseName ;
+        var print = testGroupName + ' -> ' + testCaseName;
 
-        if(extraInfo) {
+        if (extraInfo) {
             print += JSON.stringify(extraInfo) + " >"
         }
 
@@ -80,7 +80,7 @@
             if (list.length === 0 && list.toArray().length == 0) {
                 success(arguments);
             } else {
-                failed(arguments, {'list.length': list.length, 'list.toArray().length': list.toArray().length });
+                failed(arguments, {'list.length': list.length, 'list.toArray().length': list.toArray().length});
             }
         })();
 
@@ -229,7 +229,12 @@
 
         (function selectTest() {
             var list = new List([
-                {"reminder_id": 1394605968734, "resource_id": "{\"aid\":1,\"folder\":\"[Gmail]/All Mail\",\"uid\":1868}", "conversation_id": "1462171569175222559", "ts_due": 1279949899}
+                {
+                    "reminder_id": 1394605968734,
+                    "resource_id": "{\"aid\":1,\"folder\":\"[Gmail]/All Mail\",\"uid\":1868}",
+                    "conversation_id": "1462171569175222559",
+                    "ts_due": 1279949899
+                }
             ]);
             var rangeList = list.select(function (item) {
                 item.ts_reminder = item['ts_due'];
@@ -245,7 +250,7 @@
         })();
 
         (function arrayUniqueTest() {
-            var list1 = (new List([1, 2, 3, 2, 2 , 1 , 3])).unique();
+            var list1 = (new List([1, 2, 3, 2, 2, 1, 3])).unique();
 
             if (list1.length == 3) {
                 success(arguments);
@@ -255,7 +260,7 @@
         })();
 
         (function arrayJoinTestTest() {
-            var list1 = (new List([1, 2, 3, 4, 5 , 6 , 7]));
+            var list1 = (new List([1, 2, 3, 4, 5, 6, 7]));
             var str = list1.join(', ');
             if (str == '1, 2, 3, 4, 5, 6, 7') {
                 success(arguments);
@@ -267,10 +272,10 @@
         (function eachTest() {
             console.log('each-Started');
             var rows = [
-                { id: 1},
-                {id: 2 },
-                {id: 3 },
-                {id: 4 }
+                {id: 1},
+                {id: 2},
+                {id: 3},
+                {id: 4}
             ];
 
             var retIds = [];
@@ -289,11 +294,11 @@
 
         (function topTest1() {
             var rows = [
-                { id: 1 },
-                { id: 2 },
-                { id: 3 },
-                { id: 4 },
-                { id: 5 }
+                {id: 1},
+                {id: 2},
+                {id: 3},
+                {id: 4},
+                {id: 5}
             ];
 
             var list = new List(rows);
@@ -308,11 +313,11 @@
 
         (function topTest2() {
             var rows = [
-                { id: 1 },
-                { id: 2 },
-                { id: 3 },
-                { id: 4 },
-                { id: 5 }
+                {id: 1},
+                {id: 2},
+                {id: 3},
+                {id: 4},
+                {id: 5}
             ];
 
             var list = new List(rows);
@@ -327,11 +332,11 @@
 
         (function bottomTest1() {
             var rows = [
-                { id: 1 },
-                { id: 2 },
-                { id: 3 },
-                { id: 4 },
-                { id: 5 }
+                {id: 1},
+                {id: 2},
+                {id: 3},
+                {id: 4},
+                {id: 5}
             ];
 
             var list = new List(rows);
@@ -346,11 +351,11 @@
 
         (function bottomTest2() {
             var rows = [
-                { id: 1 },
-                { id: 2 },
-                { id: 3 },
-                { id: 4 },
-                { id: 5 }
+                {id: 1},
+                {id: 2},
+                {id: 3},
+                {id: 4},
+                {id: 5}
             ];
 
             var list = new List(rows);
@@ -364,8 +369,8 @@
             }
         })();
 
-        (function eachAsynTestWithArray() {
-            console.log('eachAsynTestWithArray-Started');
+        (function eachAsyncTestWithArray() {
+            console.log('eachAsyncTestWithArray-Started');
             var args = arguments;
 
             var foo = function (item, cb) {
@@ -374,16 +379,16 @@
             };
 
             var rows = [
-                { id: 1},
-                {id: 2 },
-                {id: 3 },
-                {id: 4 },
-                {id: 5 }
+                {id: 1},
+                {id: 2},
+                {id: 3},
+                {id: 4},
+                {id: 5}
             ];
 
             var retIds = [];
 
-            List.eachAsyn(rows, function (item, index, continueLoop) {
+            List.eachAsync(rows, function (item, index, continueLoop) {
                 foo(item, function (err, data) {
                     if (err) {
                         continueLoop(err);
@@ -406,12 +411,12 @@
                     failed(args);
                 }
 
-                console.log('eachAsynTestWithArray-End');
+                console.log('eachAsyncTestWithArray-End');
             });
         })();
 
-        (function eachAsynTestWithList() {
-            console.log('eachAsynTestWithList-Started');
+        (function eachAsyncTestWithList() {
+            console.log('eachAsyncTestWithList-Started');
             var args = arguments;
             var foo = function (item, cb) {
                 cb.apply(null, [null]);
@@ -419,16 +424,16 @@
             };
 
             var rows = new List([
-                { id: 1},
-                {id: 2 },
-                {id: 3 },
-                {id: 4 },
-                {id: 5 }
+                {id: 1},
+                {id: 2},
+                {id: 3},
+                {id: 4},
+                {id: 5}
             ]);
 
             var retIds = [];
 
-            rows.eachAsyn(function (item, index, continueLoop) {
+            rows.eachAsync(function (item, index, continueLoop) {
                 foo(item, function (err) {
                     if (err) {
                         continueLoop(err);
@@ -452,19 +457,21 @@
                     failed(args);
                 }
 
-                console.log('eachAsynTestWithList-End');
+                console.log('eachAsyncTestWithList-End');
             });
         })();
 
         (function whereTest() {
             var rows = [
-                { id: 1},
-                {id: 2 },
-                {id: 3 },
-                {id: 4 }
+                {id: 1},
+                {id: 2},
+                {id: 3},
+                {id: 4}
             ];
 
-            var retIds = (new List(rows)).where(function (t) { return (t.id == 1);});
+            var retIds = (new List(rows)).where(function (t) {
+                return (t.id == 1);
+            });
             if (retIds[0].id == 1) {
                 success(arguments);
             } else {
@@ -472,12 +479,12 @@
             }
         })();
 
-        (function exeAsynFunctionsTest() {
+        (function exeAsyncFunctionsTest() {
             var thisArgs = arguments;
             var rows = [
                 {id: 1},
-                {id: 2 },
-                {id: 3 }
+                {id: 2},
+                {id: 3}
             ];
 
             List.exeAsync(function (next) {
@@ -499,15 +506,31 @@
 
         (function listAsArrayAccessTest() {
             var rows = [
-                { id: 1},
-                {id: 2 },
-                {id: 3 },
-                {id: 4 }
+                {id: 1},
+                {id: 2},
+                {id: 3},
+                {id: 4}
             ];
 
             var retIds = (new List(rows));
 
             if (retIds[0].id == 1 && retIds[1].id == 2) {
+                success(arguments);
+            } else {
+                failed(arguments);
+            }
+        })();
+
+        (function extendTest() {
+            var rows = [
+                {id: 1},
+                {id: 3},
+                {id: 4}
+            ];
+
+            List.extend(rows);
+            rows.insertAt(1, {id: 2});
+            if (rows[0].id == 1 && rows[1].id == 2) {
                 success(arguments);
             } else {
                 failed(arguments);
