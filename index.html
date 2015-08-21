@@ -5,7 +5,7 @@
     <title>Jscollection by somnathpanja</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
@@ -67,10 +67,10 @@ myDataList.eachAsync(function(item, index, next) {
 <pre><code>List.exeAsync(function insertIntomongo(next){
         // Do operation in mongo
         next(dataReturnedFromMongo); // once you are done call next
-}, function insertIntoRedis(dataReturnedFromMongo, next){
+}, function insertIntoRedis(next, dataReturnedFromMongo){
         // Do operation in redis
         next(dataReturnedFromRedis); // // once you are done call next
-}, function onDone(dataReturnedFromRedis, next){
+}, function onDone(next, dataReturnedFromRedis){
       // call the final callback here
 });
 </code></pre>
@@ -111,4 +111,3 @@ range(fromIndex,toIndex)         // Collect all items within a range
   
   </body>
 </html>
-
