@@ -120,11 +120,11 @@ Quering the collection
     List.exeAsync(function insertIntomongo(next){
             // Do operation in mongo
             next(datareturnedFromMongo); // once you are done call next
-    }, function insertIntoOracle(datareturnedFromMongo, next){
+    }, function insertIntoOracle(next, datareturnedFromMongo){
             // Do operation in oracle
             next(datareturnedFromOracle); // // once you are done call next
-    }, function onDone(datareturnedFromOracle, next){
-           
+    }, function onDone(next, datareturnedFromOracle){
+           // final call back here
     });
 
 ## Tests
