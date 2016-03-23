@@ -26,11 +26,11 @@ Basic functions
 
 Traversing the collection
 
-  * each(function) - travarse the collection
-  * eachReverse(function) - travarse the collection in reverse way
-  * eachAsyn(function(item,index,nextCallback){}) - travarse the collection and perform asynchronous operations for each
+  * each(function)                 // Traverse the collection
+  * eachReverse(function)          // Traverse the collection in reverse way
+  * eachAsync(function(item,index,nextCallback){}) // traverse the collection and perform asynchronous operations for each
 
-Quering the collection 
+Querying the collection 
 
   * select(selector function)
   * selectMulti(selector function)
@@ -43,7 +43,11 @@ Quering the collection
   * bottom(count)
   * range(fromIndex,toIndex)
 
-## How to use
+Others
+
+  * List.extend(myArray);          // Extend an array to List in order to avail features of List
+
+## How to use js collection? Example?
 
 ####Creating list
 
@@ -68,6 +72,7 @@ Quering the collection
                          {name:"Ritu", marks: 50, class: 2},
                          {name:"Sonia", marks: 50, class: 2}
                          ]);
+                         
 ####Removing Item to List using remove(), removeLast(), removeAt() and clear()
 
     list.remove(item);
@@ -115,7 +120,7 @@ Quering the collection
     // OR
     var groups = list.groupby(function(t){return t.class;});
     
-#### Execute asyncronus functions one after another
+#### Execute asynchronous functions one after another
 
     List.exeAsync(function insertIntomongo(next){
             // Do operation in mongo
