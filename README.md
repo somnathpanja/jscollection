@@ -8,7 +8,7 @@ A simple and powerful generic collection (List, Stack, Queue, FixedQueue) includ
 ## List of functions
 
 Basic functions
-
+   
   * var myList = new List();
   * myList.add(item)               // Add an item in collection
   * myList.addRange(arrayOfItems)  // Add multiple items in collection
