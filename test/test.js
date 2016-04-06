@@ -33,7 +33,7 @@
 
 (function (module) {
 
-    var Collection = require('./../src/collections.js');
+    var Collection = require('./../index.js');
     var List = Collection.List;
     var Queue = Collection.Queue;
     var FixedQueue = Collection.FixedQueue;

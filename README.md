@@ -131,7 +131,14 @@ Others
     }, function onDone(next, datareturnedFromOracle){
            // final call back here
     });
-
+    
+#### Call a function N times asynchronously using loopAsync
+    
+    list.loopAsync(N, function callMeNTimes(index, next){
+        console.log('Called :' + index);
+        next();
+    });
+       
 ## Tests
 
   node test/test.js
@@ -147,3 +154,4 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 * 1.0.1 Released
 * 1.0.3 Released
 * 1.0.4 Released
+* 1.0.5 Released
