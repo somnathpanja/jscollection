@@ -461,6 +461,15 @@
   };
 
   /**
+   * @description loop for each item asynchronously reverse direction from last to first
+   * @param delegate function pointer to be called in loop params: (item, index, continueCallback)
+   * @param onDone function will be called on loop end or any error occurred
+   */
+  List.prototype.eachAsyncReverse = function (delegate, onDone) {
+    List.eachAsyncReverse(this, delegate, onDone);
+  };
+
+  /**
    * @description Prints in console
    */
   List.prototype.printInConsole = function () {

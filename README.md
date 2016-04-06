@@ -17,20 +17,21 @@ Basic functions
   * myList.remove(item)            // Remove an item from collection also returns the deleted item
   * myList.removeLast()            // Remove the last item from collection also returns the deleted item
   * myList.removeAt(index)         // Remove an item at specific index from collection also returns the deleted item
-  * myList.first()                 // Get the first item from the collection
-  * myList.last()                  // Get the last item from the collection
+  * myList.first()                 // Get the first item from the collection, throws Index out of range exception if empty
+  * myList.last()                  // Get the last item from the collection, throws Index out of range exception if empty
   * myList.count()                 // Get the size of the collection
-  * myList.any()                   // Is there any items present in collection?
-  * myList.avg()                   // Calculate average of values present in collection
-  * myList.sum()                   // Calculate sum of values present in collection
+  * myList.any()                   // Is there any items present in collection? returns true/false
+  * myList.avg()                   // Calculate average of numeric values present in collection
+  * myList.sum()                   // Calculate sum of numeric values present in collection
 
 Traversing the collection
 
   * each(function)                 // Traverse the collection
   * eachReverse(function)          // Traverse the collection in reverse way
   * eachAsync(function(item,index,nextCallback){}) // traverse the collection and perform asynchronous operations for each
+  * eachAsyncReverse(function(item,index,nextCallback){}) // traverse the collection and perform asynchronous operations for each in reverse direction
 
-Querying the collection 
+Querying the collection | See more example at bottom
 
   * select(selector function)
   * selectMulti(selector function)
@@ -45,7 +46,9 @@ Querying the collection
 
 Others
 
-  * List.extend(myArray);          // Extend an array to List in order to avail features of List
+  * List.extend(myArray); | Static Function | Extends an array to List in order to avail features of List
+  * List.toList(myArray); OR List.toList(myObject); // Creates new List from an Array or values list of a normal object
+  * List.printInConsole(); // Prints the data present in list in console | you can use it for debug purpose
 
 ## How to use js collection? Example?
 
@@ -73,7 +76,7 @@ Others
                          {name:"Sonia", marks: 50, class: 2}
                          ]);
                          
-####Removing Item to List using remove(), removeLast(), removeAt() and clear()
+####Removing Item from List using remove(), removeLast(), removeAt() and clear()
 
     list.remove(item);
     var removedItem = list.removeLast();    // Removes the last item from collection
@@ -91,6 +94,18 @@ Others
     
      list.eachReverse(function(item, indexOfItem){
         console.log(item.name +':' + item.marks);
+    });
+
+#### Traversing a collection asynchronously using eachAsync, eachAsyncReverse
+
+    list.eachAsync(function(item, indexOfItem, next){
+        console.log(item.name +':' + item.marks);
+        next();
+    });
+    
+    list.eachAsyncReverse(function(item, indexOfItem, previous){
+        console.log(item.name +':' + item.marks);
+        previous();
     });
     
 ####Break the loop while traversing through collection
@@ -131,7 +146,7 @@ Others
     }, function onDone(next, datareturnedFromOracle){
            // final call back here
     });
-    
+        
 #### Call a function N times asynchronously using loopAsync
     
     list.loopAsync(N, function callMeNTimes(index, next){
