@@ -617,7 +617,8 @@
 
   /**
    * returns list of values extracted from array or object property values
-   * @example List.exeAsync(f1, f2, f3);
+   * @example List.toList([f1, f2, f3]); ==> List of f1, f2, f3
+   * List.toList({x: {a:1, b:1}, y: {a:2, b:3}, z: {a:3, b:3}}); ==> List of {a:1, b:1}, {a:2, b:2}, {a:3, b:3}
    */
   List.toList = function (obj) {
     if (Array.isArray(obj))
