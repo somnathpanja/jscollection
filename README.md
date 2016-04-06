@@ -23,6 +23,9 @@ Basic functions
   * myList.any()                   // Is there any items present in collection? returns true/false
   * myList.avg()                   // Calculate average of numeric values present in collection
   * myList.sum()                   // Calculate sum of numeric values present in collection
+  * myList.reverse()               // Reversing the elements in an array
+  * myList.sort()                  // Sort items in collection
+  * myList.sort(compareFunction)   // Sort items in collection | http://www.w3schools.com/jsref/jsref_sort.asp#compareFunction
 
 Traversing the collection
 
