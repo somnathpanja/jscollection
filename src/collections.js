@@ -48,6 +48,8 @@
         array[key] = List.prototype[key];
       }
     });
+
+    return array;
   };
 
   List.prototype = [];
