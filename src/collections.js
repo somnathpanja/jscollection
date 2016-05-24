@@ -56,37 +56,11 @@
   List.constructor = List;
 
   /**
-   * @description loop from last
-   * @static Static method
-   * @param array
-   * @param cb
-   */
-  List.eachReverse = function (array, cb) {
-    for (var i = array.length - 1; i >= 0; i--) {
-      if (cb(array[i], i) === false) {
-        break;
-      }
-    }
-  };
-
-  /**
    * @description Add an item
    * @param pItem
    */
   List.prototype.add = function (pItem) {
     this.push(pItem);
-  };
-
-  /**
-   * @description Remove an item
-   * @param pItem
-   * @returns {*}
-   */
-  List.prototype.remove = function (pItem) {
-    var index = this.indexOf(pItem);
-    if (index !== -1) {
-      return this.removeAt(index);
-    }
   };
 
   /**
@@ -100,6 +74,18 @@
       }
     } else {
       this.push(pItems);
+    }
+  };
+
+  /**
+   * @description Remove an item
+   * @param pItem
+   * @returns {*}
+   */
+  List.prototype.remove = function (pItem) {
+    var index = this.indexOf(pItem);
+    if (index !== -1) {
+      return this.removeAt(index);
     }
   };
 
@@ -142,7 +128,7 @@
    * @returns {T} Returns the item which was removed
    */
   List.prototype.removeAt = function (pIndex) {
-    this._doIndexAccess();
+    this._doIndexAccess(pIndex);
     return this.splice(pIndex, 1)[0];
   };
 
@@ -155,13 +141,29 @@
   };
 
   /**
+   * @description Clean function cleans unwanted items from list
+   * @param item2Delete
+   * @returns {List}
+   */
+  List.prototype.clean = function (item2Delete) {
+    for (var i = 0; i < this.length; i++) {
+      if (this[i] === item2Delete) {
+        this.splice(i, 1);
+        i--;
+      }
+    }
+    return this;
+  };
+
+  /**
    * @description Checks if the index is within range
    * @param index
    * @private
    */
   List.prototype._doIndexAccess = function (index) {
-    if (index < 0 || index >= this.length)
+    if (typeof index === 'undefined' || index < 0 || index >= this.length)
       throw new Error("Index out of range: " + index + "/" + this.length);
+    return index;
   };
 
   /**
@@ -170,7 +172,7 @@
    * @returns {*}
    */
   List.prototype.first = function () {
-    this._doIndexAccess();
+    this._doIndexAccess(0);
 
     if (this.length > 0)
       return this[0];
@@ -182,8 +184,13 @@
    * @returns {*}
    */
   List.prototype.last = function (index) {
-    this._doIndexAccess();
-    return this[this.length - index - 1];
+    if (typeof index === 'undefined') {
+      this._doIndexAccess(this.length - 1);
+      return this[this.length - 1];
+    } else {
+      this._doIndexAccess(this.length - index - 1);
+      return this[this.length - index - 1];
+    }
   };
 
   /**
@@ -263,8 +270,26 @@
    * @description Loop through each items in reverse order
    * @param cb function(item, index){}
    */
-  List.prototype.eachFromLast = function (cb) {
-    List.eachFromLast(this, cb);
+  List.prototype.eachReverse = function (cb) {
+    List.eachReverse(this, cb);
+  };
+
+  /**
+   * @description loop for each item asynchronously
+   * @param delegate function pointer to be called in loop params: (item, index, continueCallback)
+   * @param onDone function will be called on loop end or any error occurred
+   */
+  List.prototype.eachAsync = function (delegate, onDone) {
+    List.eachAsync(this, delegate, onDone);
+  };
+
+  /**
+   * @description loop for each item asynchronously reverse direction from last to first
+   * @param delegate function pointer to be called in loop params: (item, index, continueCallback)
+   * @param onDone function will be called on loop end or any error occurred
+   */
+  List.prototype.eachAsyncReverse = function (delegate, onDone) {
+    List.eachAsyncReverse(this, delegate, onDone);
   };
 
   /**
@@ -273,21 +298,6 @@
    */
   List.prototype.toArray = function () {
     return this.slice(0);
-  };
-
-  /**
-   * @description Clean function cleans unwanted items from list
-   * @param item2Delete
-   * @returns {List}
-   */
-  List.prototype.clean = function (item2Delete) {
-    for (var i = 0; i < this.length; i++) {
-      if (this[i] === item2Delete) {
-        this.splice(i, 1);
-        i--;
-      }
-    }
-    return this;
   };
 
   /**
@@ -389,11 +399,10 @@
    */
   List.prototype.orderByAsc = function (keySelector) {
     var thisC = this;
-    var list = instanceFactory(thisC);
-    list.sort(function (a, b) {
+    thisC.sort(function (a, b) {
       return keySelector(a) - keySelector(b);
     });
-    return list;
+    return thisC;
   };
 
   /**
@@ -403,11 +412,10 @@
    */
   List.prototype.orderByDesc = function (keySelector) {
     var thisC = this;
-    var list = instanceFactory(thisC);
-    list.sort(function (a, b) {
+    thisC.sort(function (a, b) {
       return keySelector(b) - keySelector(a);
     });
-    return list;
+    return thisC;
   };
 
   /**
@@ -419,7 +427,7 @@
     var thisC = this;
     var groups = {};
     this.each(function (item) {
-      var key = keySelector(item);
+      var key = (typeof keySelector === 'string') ? item[keySelector] : keySelector(item);
       if (!groups[key]) {
         groups[key] = instanceFactory(thisC);
       }
@@ -454,30 +462,14 @@
   };
 
   /**
-   * @description loop for each item asynchronously
-   * @param delegate function pointer to be called in loop params: (item, index, continueCallback)
-   * @param onDone function will be called on loop end or any error occurred
-   */
-  List.prototype.eachAsync = function (delegate, onDone) {
-    List.eachAsync(this, delegate, onDone);
-  };
-
-  /**
-   * @description loop for each item asynchronously reverse direction from last to first
-   * @param delegate function pointer to be called in loop params: (item, index, continueCallback)
-   * @param onDone function will be called on loop end or any error occurred
-   */
-  List.prototype.eachAsyncReverse = function (delegate, onDone) {
-    List.eachAsyncReverse(this, delegate, onDone);
-  };
-
-  /**
    * @description Prints in console
    */
   List.prototype.printInConsole = function () {
     List.each(this, function (item, idx) {
       console.log(idx + ": " + JSON.stringify(item));
     });
+
+    return this;
   };
 
   /*********************---------------------********************/
@@ -507,6 +499,20 @@
     }
 
     if (onDone) onDone();
+  };
+
+  /**
+   * @description Loop through each items in reverse order
+   * @static Static method
+   * @param array
+   * @param cb
+   */
+  List.eachReverse = function (array, cb) {
+    for (var i = array.length - 1; i >= 0; i--) {
+      if (cb(array[i], i) === false) {
+        break;
+      }
+    }
   };
 
   /**
