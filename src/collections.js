@@ -30,7 +30,7 @@
 (function (module) {
   'use strict';
 
-  var List = function (elements) {
+  var List = function List(elements) {
     if (typeof elements !== 'undefined') {
       this.addRange(elements);
     }
@@ -54,6 +54,7 @@
 
   List.prototype = [];
   List.constructor = List;
+  List.prototype.constructor = List;
 
   /**
    * @description Add an item
@@ -263,7 +264,7 @@
    * @param cb function(item, index){}
    */
   List.prototype.each = function (cb) {
-    List.each(this, cb, arguments[1]);
+    return List.each(this, cb, arguments[1]);
   };
 
   /**
@@ -271,7 +272,7 @@
    * @param cb function(item, index){}
    */
   List.prototype.eachReverse = function (cb) {
-    List.eachReverse(this, cb);
+    return List.eachReverse(this, cb);
   };
 
   /**
@@ -280,7 +281,7 @@
    * @param onDone function will be called on loop end or any error occurred
    */
   List.prototype.eachAsync = function (delegate, onDone) {
-    List.eachAsync(this, delegate, onDone);
+    return List.eachAsync(this, delegate, onDone);
   };
 
   /**
@@ -289,7 +290,7 @@
    * @param onDone function will be called on loop end or any error occurred
    */
   List.prototype.eachAsyncReverse = function (delegate, onDone) {
-    List.eachAsyncReverse(this, delegate, onDone);
+    return List.eachAsyncReverse(this, delegate, onDone);
   };
 
   /**
@@ -465,8 +466,9 @@
    * @description Prints in console
    */
   List.prototype.printInConsole = function () {
+    var name = this.constructor.name;
     List.each(this, function (item, idx) {
-      console.log(idx + ": " + JSON.stringify(item));
+      console.log(name + "[" + idx + "] => " + JSON.stringify(item));
     });
 
     return this;
@@ -499,6 +501,7 @@
     }
 
     if (onDone) onDone();
+    return array;
   };
 
   /**
@@ -513,6 +516,7 @@
         break;
       }
     }
+    return array;
   };
 
   /**
@@ -543,6 +547,7 @@
     } catch (er) {
       if (onDone) onDone.apply(null, [er]);
     }
+    return array;
   };
 
   /**
@@ -573,6 +578,7 @@
     } catch (er) {
       if (onDone) onDone.apply(null, [er]);
     }
+    return array;
   };
 
   /**
@@ -650,8 +656,8 @@
       } else {
         var keys = Object.keys(obj);
         var list = new List();
-        for (var i=0; i<keys.length; i++) {
-            list.add(obj[keys[i]]);
+        for (var i = 0; i < keys.length; i++) {
+          list.add(obj[keys[i]]);
         }
         return list;
       }
@@ -665,7 +671,7 @@
    * @description A Queue
    * @constructor
    */
-  var Queue = function () {
+  var Queue = function Queue() {
   };
 
   Queue.prototype = List.prototype;
@@ -724,7 +730,7 @@
    * it automatically pops the item from rare to fit new item
    * @constructor
    */
-  var FixedQueue = function (maxCount) {
+  var FixedQueue = function FixedQueue(maxCount) {
     this._maxCount = maxCount ? maxCount : 10;
   };
 

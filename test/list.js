@@ -255,7 +255,7 @@ describe("UNIT TEST => (List)", function () {
       expect(selected.last().marks).to.equal(90);
     });
 
-    it(".orderByDesc", function () {
+    it(".orderByDesc() => select all the students who got marks more or equal to 60 order by descending marks", function () {
       var selected = students.where(function (st) {
         return (st.marks >= 60);
       }).orderByDesc(function (t) {

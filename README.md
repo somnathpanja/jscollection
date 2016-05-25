@@ -160,10 +160,12 @@ Static Functions | When you don't really need to convert an array to a List, So 
         console.log('Called :' + index);
         next();
     });
-       
+
+#### * For more examples please Checkout jscollection/examples folder.
+
 ## Tests
 
-  node test/test.js
+  npm test
 
 ## Contributing
 
