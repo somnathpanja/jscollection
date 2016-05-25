@@ -5,7 +5,9 @@ BREAKING CHANGES
 
 IMPROVEMENTS
 1) List.toList has been improved- create a list from normal object, Also new option to select only keys into list
+2) Unit test cases added using mocha and chai
 
 ISSUES FIXED:
 1) Issue fixed with orderByAsc
 2) Issue fixed with orderByDesc
+
