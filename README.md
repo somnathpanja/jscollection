@@ -47,12 +47,16 @@ Querying the collection | See more example at bottom
   * bottom(count)
   * range(fromIndex,toIndex)
 
-Others
+Static Functions | When you don't really need to convert an array to a List, So first argument of the functions below will be your array. 
 
-  * List.extend(myArray); | Static Function | Extends an array to List in order to avail features of List
+  * List.extend(myArray); // Static Function | Extends an array to List in order to avail features of List
   * List.toList(myArray, isSelectKeys); OR List.toList(myObject, isSelectKeys); // Creates new List from an Array or values list of a normal object, pass isSelectKeys as true if you want to consider keys
   * List.printInConsole(); // Prints the data present in list in console | you can use it for debug purpose
-
+  * List.each(myArray, function)         // Traverse the collection
+  * List.eachReverse(myArray, function)  // Traverse the collection in reverse way
+  * List.eachAsync(myArray, function(item,index,nextCallback){}) // traverse the collection and perform asynchronous operations for each
+  * List.eachAsyncReverse(myArray, function(item,index,nextCallback){}) // traverse the collection and perform asynchronous operations for each in reverse direction
+  
 ## How to use js collection? Example?
 
 ####Creating list

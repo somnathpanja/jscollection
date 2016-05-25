@@ -283,11 +283,19 @@ describe("UNIT TEST => (List)", function () {
   });
 
   describe("MISCELLANEOUS", function () {
-    it(".ToArray()", function () {
+    it(".toArray()", function () {
       var list = new List([1, 2, 3]);
       var arry = list.toArray();
       expect(list).to.not.equal(arry);
     });
+
+    it(".printInConsole()", function () {
+      var list = new List();
+      list.printInConsole();
+    });
+  });
+
+  describe("STATIC FUNCTIONS", function () {
 
     it("List.isList()", function () {
       var list = new List([1, 2, 3]);
@@ -320,13 +328,6 @@ describe("UNIT TEST => (List)", function () {
       expect(list.last()).to.equal('3');
     });
 
-    it("List.isList()", function () {
-      var list = new List();
-      list.printInConsole();
-    });
-  });
-
-  describe("STATIC FUNCTIONS", function () {
     it("List.each()", function () {
       var rows = [
         {id: 1},
