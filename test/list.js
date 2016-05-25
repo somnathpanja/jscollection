@@ -110,17 +110,10 @@ describe("UNIT TEST => (List)", function () {
 
   describe("LOOPS", function () {
     it(".each()", function () {
-      var rows = [
-        {id: 1},
-        {id: 2},
-        {id: 3},
-        {id: 4}
-      ];
-
+      var rows = new List([{id: 1}, {id: 2}, {id: 3}, {id: 4}]);
       var retIds = [];
 
-      List.each(rows, function (item, index) {
-        // console.log('   Visiting Index:' + index + ' item: ' + JSON.stringify(item));
+      rows.each(function (item, index) {
         retIds.push(item);
       });
 
@@ -128,18 +121,25 @@ describe("UNIT TEST => (List)", function () {
       expect(retIds[1].id).to.equal(2);
       expect(retIds[2].id).to.equal(3);
       expect(retIds[3].id).to.equal(4);
-    });
-    it(".eachReverse()", function () {
-      var rows = [
-        {id: 1},
-        {id: 2},
-        {id: 3},
-        {id: 4}
-      ];
 
+      // Break the loop
+      retIds = [];
+
+      rows.each(function (item, index) {
+        if (index === 2) return false;
+        retIds.push(item);
+      });
+
+      expect(retIds.length).to.equal(2);
+      expect(retIds[0].id).to.equal(1);
+      expect(retIds[1].id).to.equal(2);
+    });
+
+    it(".eachReverse()", function () {
+      var rows = new List([{id: 1}, {id: 2}, {id: 3}, {id: 4}]);
       var retIds = [];
 
-      List.eachReverse(rows, function (item, index) {
+      rows.eachReverse(function (item, index) {
         retIds.push(item);
       });
 
@@ -147,19 +147,25 @@ describe("UNIT TEST => (List)", function () {
       expect(retIds[1].id).to.equal(3);
       expect(retIds[2].id).to.equal(2);
       expect(retIds[3].id).to.equal(1);
+
+      // Break the loop
+      retIds = [];
+
+      rows.eachReverse(function (item, index) {
+        if (index === 1) return false;
+        retIds.push(item);
+      });
+
+      expect(retIds.length).to.equal(2);
+      expect(retIds[0].id).to.equal(4);
+      expect(retIds[1].id).to.equal(3);
     });
 
     it(".eachAsync()", function () {
-      var rows = [
-        {id: 1},
-        {id: 2},
-        {id: 3},
-        {id: 4}
-      ];
-
+      var rows = new List([{id: 1}, {id: 2}, {id: 3}, {id: 4}]);
       var retIds = [];
 
-      List.eachAsync(rows, function (item, index, next) {
+      rows.eachAsync(function (item, index, next) {
         retIds.push(item);
         next();
       }, function onDone() {
@@ -170,16 +176,10 @@ describe("UNIT TEST => (List)", function () {
       });
     });
     it(".eachAsyncReverse()", function () {
-      var rows = [
-        {id: 1},
-        {id: 2},
-        {id: 3},
-        {id: 4}
-      ];
-
+      var rows = new List([{id: 1}, {id: 2}, {id: 3}, {id: 4}]);
       var retIds = [];
 
-      List.eachAsyncReverse(rows, function (item, index, next) {
+      rows.eachAsyncReverse(function (item, index, next) {
         retIds.push(item);
         next();
       }, function onDone() {
@@ -292,6 +292,114 @@ describe("UNIT TEST => (List)", function () {
     it("List.isList()", function () {
       var list = new List([1, 2, 3]);
       expect(List.isList(list)).to.equal(true);
+    });
+  });
+
+  describe("STATIC FUNCTIONS", function () {
+    it("List.each()", function () {
+      var rows = [
+        {id: 1},
+        {id: 2},
+        {id: 3},
+        {id: 4}
+      ];
+
+      var retIds = [];
+
+      List.each(rows, function (item, index) {
+        retIds.push(item);
+      });
+
+      expect(retIds[0].id).to.equal(1);
+      expect(retIds[1].id).to.equal(2);
+      expect(retIds[2].id).to.equal(3);
+      expect(retIds[3].id).to.equal(4);
+
+      // Break the loop
+      retIds = [];
+
+      List.each(rows, function (item, index) {
+        if (index === 2) return false;
+        retIds.push(item);
+      });
+
+      expect(retIds.length).to.equal(2);
+      expect(retIds[0].id).to.equal(1);
+      expect(retIds[1].id).to.equal(2);
+    });
+
+    it("List.eachReverse()", function () {
+      var rows = [
+        {id: 1},
+        {id: 2},
+        {id: 3},
+        {id: 4}
+      ];
+
+      var retIds = [];
+
+      List.eachReverse(rows, function (item, index) {
+        retIds.push(item);
+      });
+
+      expect(retIds[0].id).to.equal(4);
+      expect(retIds[1].id).to.equal(3);
+      expect(retIds[2].id).to.equal(2);
+      expect(retIds[3].id).to.equal(1);
+
+      // Break the loop
+      retIds = [];
+
+      List.eachReverse(rows, function (item, index) {
+        if (index === 1) return false;
+        retIds.push(item);
+      });
+
+      expect(retIds.length).to.equal(2);
+      expect(retIds[0].id).to.equal(4);
+      expect(retIds[1].id).to.equal(3);
+    });
+
+    it("List.eachAsync()", function () {
+      var rows = [
+        {id: 1},
+        {id: 2},
+        {id: 3},
+        {id: 4}
+      ];
+
+      var retIds = [];
+
+      List.eachAsync(rows, function (item, index, next) {
+        retIds.push(item);
+        next();
+      }, function onDone() {
+        expect(retIds[0].id).to.equal(1);
+        expect(retIds[1].id).to.equal(2);
+        expect(retIds[2].id).to.equal(3);
+        expect(retIds[3].id).to.equal(4);
+      });
+    });
+
+    it("List.eachAsyncReverse()", function () {
+      var rows = [
+        {id: 1},
+        {id: 2},
+        {id: 3},
+        {id: 4}
+      ];
+
+      var retIds = [];
+
+      List.eachAsyncReverse(rows, function (item, index, next) {
+        retIds.push(item);
+        next();
+      }, function onDone() {
+        expect(retIds[0].id).to.equal(4);
+        expect(retIds[1].id).to.equal(3);
+        expect(retIds[2].id).to.equal(2);
+        expect(retIds[3].id).to.equal(1);
+      });
     });
   });
 });
