@@ -293,6 +293,37 @@ describe("UNIT TEST => (List)", function () {
       var list = new List([1, 2, 3]);
       expect(List.isList(list)).to.equal(true);
     });
+
+    it("List.toList()", function () {
+      var myObject = {'a': {id: 1}, 'b': {id: 2}, 'c': {id: 3}, 'd': {id: 4}};
+
+      var list = List.toList(myObject);
+      expect(list.count()).to.equal(4);
+      expect(list.first().id).to.equal(1);
+      expect(list.last().id).to.equal(4);
+
+      list = List.toList(myObject, true);
+      expect(list.count()).to.equal(4);
+      expect(list.first()).to.equal('a');
+      expect(list.last()).to.equal('d');
+
+      var myArray = [{id: 1}, {id: 2}, {id: 3}, {id: 4}];
+
+      var list = List.toList(myArray);
+      expect(list.count()).to.equal(4);
+      expect(list.first().id).to.equal(1);
+      expect(list.last().id).to.equal(4);
+
+      list = List.toList(myArray, true);
+      expect(list.count()).to.equal(4);
+      expect(list.first()).to.equal('0');
+      expect(list.last()).to.equal('3');
+    });
+
+    it("List.isList()", function () {
+      var list = new List();
+      list.printInConsole();
+    });
   });
 
   describe("STATIC FUNCTIONS", function () {

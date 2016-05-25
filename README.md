@@ -50,7 +50,7 @@ Querying the collection | See more example at bottom
 Others
 
   * List.extend(myArray); | Static Function | Extends an array to List in order to avail features of List
-  * List.toList(myArray); OR List.toList(myObject); // Creates new List from an Array or values list of a normal object
+  * List.toList(myArray, isSelectKeys); OR List.toList(myObject, isSelectKeys); // Creates new List from an Array or values list of a normal object, pass isSelectKeys as true if you want to consider keys
   * List.printInConsole(); // Prints the data present in list in console | you can use it for debug purpose
 
 ## How to use js collection? Example?

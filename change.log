@@ -1,7 +1,11 @@
 1.0.6
 --------
-eachFromLast() has been renamed to eachReverse()
+BREAKING CHANGES
+1) eachFromLast() has been renamed to eachReverse()
 
-Issue fixed:
+IMPROVEMENTS
+1) List.toList has been improved- create a list from normal object, Also new option to select only keys into list
+
+ISSUES FIXED:
 1) Issue fixed with orderByAsc
 2) Issue fixed with orderByDesc
