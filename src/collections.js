@@ -301,6 +301,14 @@
     return this.slice(0);
   };
 
+  List.prototype.max = function () {
+    return Math.max.apply(null, this);
+  };
+
+  List.prototype.min = function () {
+    return Math.min.apply(null, this);
+  };
+
   /**
    * @description Does additions of all items present in the array or returned by selector or by key
    * @param selector
@@ -343,12 +351,12 @@
     var thisC = this;
     var list = instanceFactory(thisC);
     if ((typeof selector === 'string')) {
-      this.each(function (item) {
+      this.each(function (item, idx) {
         list.add(item[selector]);
       });
     } else if (selector) {
-      this.each(function (item) {
-        list.add(selector(item));
+      this.each(function (item, idx) {
+        list.add(selector(item, idx));
       });
     } else return this;
 
@@ -368,8 +376,8 @@
         list.addRange(item[selector]);
       });
     } else if (selector) {
-      this.each(function (item) {
-        list.addRange(selector(item));
+      this.each(function (item, idx) {
+        list.addRange(selector(item, idx));
       });
     } else return thisC;
 
@@ -385,8 +393,8 @@
     var thisC = this;
     var func = conditionFunc;
     var list = instanceFactory(thisC);
-    this.each(function (item) {
-      if (func(item))
+    this.each(function (item, idx) {
+      if (func(item, idx))
         list.add(item);
     });
 
@@ -471,6 +479,64 @@
       console.log(name + "[" + idx + "] => " + JSON.stringify(item));
     });
 
+    return this;
+  };
+
+  /**
+   * @description Prints as table in console
+   */
+  List.prototype.printInConsoleAsTable = function () {
+    var self = this;
+    var headers = List.toList(this.first(), true);
+
+    var tableInfo = headers.select(function (header) {
+      return {
+        headerTxt: header, maxWidth: self.select(function (row) {
+          return (typeof row[header] === 'object') ? JSON.stringify(row[header]).length : row[header].toString().length;
+        }).max()
+      };
+    });
+    var leftChar = "|", rightChar = "|";
+    var header = leftChar + tableInfo.select(function (header) {
+        var noOfSpaceReq = header.maxWidth - header.headerTxt.length;
+        var str = ' ' + header.headerTxt;
+
+        if (noOfSpaceReq == 1) {
+          str += ' ';
+        } else if (noOfSpaceReq == 0) {
+        } else {
+          var emptyStr = new Array(noOfSpaceReq + 1).join('. ').split('.');
+          str += emptyStr.join('');
+        }
+
+        return str;
+      }).join(" | ") + ' ' + rightChar;
+
+    var line = new Array(header.length - 1).join('.-').split('.').join('');
+    console.log(leftChar +line + rightChar);
+    console.log(header);
+    console.log(leftChar +line + rightChar);
+
+    self.each(function (item) {
+      var rowStr = leftChar + List.toList(item).select(function (txt, idx) {
+          txt = Array.isArray(txt) ? txt.join(',') : ((typeof txt === 'object') ? JSON.stringify(txt) : txt);
+          var header = tableInfo[idx];
+          var noOfSpaceReq = header.maxWidth - txt.length;
+          var str = ' ' + txt;
+
+          if (noOfSpaceReq == 1) {
+            str += ' ';
+          } else if (noOfSpaceReq == 0) {
+          } else {
+            var emptyStr = new Array(noOfSpaceReq + 1).join('. ').split('.');
+            str += emptyStr.join('');
+          }
+          return str;
+        }).join(' | ') + ' ' + rightChar;
+      console.log(rowStr);
+    });
+
+    console.log(leftChar +line + rightChar);
     return this;
   };
 
@@ -652,7 +718,7 @@
       return new List(isSelectKeys ? Object.keys(obj) : obj);
     else {
       if (isSelectKeys) {
-        return new List(Object.keys(obj))
+        return new List(Object.keys(obj));
       } else {
         var keys = Object.keys(obj);
         var list = new List();

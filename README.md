@@ -167,15 +167,18 @@ Static Functions | When you don't really need to convert an array to a List, So 
 
   npm test
 
+## Authors and Contributors
+
+@somnathpanja (somnathpanja@gmail.com)
+
+## Support or Contact
+
+Having trouble with Pages? Check out our documentation or report issue and we’ll help you sort it out.
+https://github.com/somnathpanja/jscollection/issues
+
+### Jscollection is maintained by somnathpanja (Somnath Panja).
+
 ## Contributing
 
 In lieu of a formal style guide, take care to maintain the existing coding style.
 Add unit tests for any new or changed functionality. Lint and test your code.
-
-## Release History
-
-* 1.0.0 Initial release
-* 1.0.1 Released
-* 1.0.3 Released
-* 1.0.4 Released
-* 1.0.5 Released
