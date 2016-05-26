@@ -492,7 +492,7 @@
     var tableInfo = headers.select(function (header) {
       return {
         headerTxt: header, maxWidth: self.select(function (row) {
-          return (typeof row[header] === 'object') ? JSON.stringify(row[header]).length : row[header].toString().length;
+          return Math.max(header.length, (typeof row[header] === 'object') ? JSON.stringify(row[header]).length : row[header].toString().length);
         }).max()
       };
     });
