@@ -496,7 +496,7 @@
         }).max()
       };
     });
-    var leftChar = "|", rightChar = "|";
+    var leftChar = "│", rightChar = "│";
     var header = leftChar + tableInfo.select(function (header) {
         var noOfSpaceReq = header.maxWidth - header.headerTxt.length;
         var str = ' ' + header.headerTxt;
@@ -510,16 +510,16 @@
         }
 
         return str;
-      }).join(" | ") + ' ' + rightChar;
+      }).join(" │ ") + ' ' + rightChar;
 
-    var line = new Array(header.length - 1).join('.-').split('.').join('');
-    console.log(leftChar +line + rightChar);
+    var line = new Array(header.length - 1).join('.─').split('.').join('');
+    console.log('├' +line + '╮');
     console.log(header);
-    console.log(leftChar +line + rightChar);
+    console.log('├' +line + '┤');
 
     self.each(function (item) {
       var rowStr = leftChar + List.toList(item).select(function (txt, idx) {
-          txt = Array.isArray(txt) ? txt.join(',') : ((typeof txt === 'object') ? JSON.stringify(txt) : txt);
+          txt = Array.isArray(txt) ? txt.join(',') : ((typeof txt === 'object') ? JSON.stringify(txt) : txt.toString());
           var header = tableInfo[idx];
           var noOfSpaceReq = header.maxWidth - txt.length;
           var str = ' ' + txt;
@@ -532,11 +532,11 @@
             str += emptyStr.join('');
           }
           return str;
-        }).join(' | ') + ' ' + rightChar;
+        }).join(' │ ') + ' ' + rightChar;
       console.log(rowStr);
     });
 
-    console.log(leftChar +line + rightChar);
+    console.log('╰' +line + '╯');
     return this;
   };
 
