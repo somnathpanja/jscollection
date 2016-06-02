@@ -7,7 +7,7 @@ A simple and powerful generic collection (List, Stack, Queue, FixedQueue) includ
   
 ## List of functions
 
-Basic functions
+###### Basic functions
    
   * var myList = new List();
   * myList.add(item)               // Add an item in collection
@@ -27,27 +27,27 @@ Basic functions
   * myList.sort()                  // Sort items in collection
   * myList.sort(compareFunction)   // Sort items in collection | http://www.w3schools.com/jsref/jsref_sort.asp#compareFunction
 
-Traversing the collection
+###### Traversing the collection
 
   * each(function)                 // Traverse the collection
   * eachReverse(function)          // Traverse the collection in reverse way
   * eachAsync(function(item,index,nextCallback){}) // traverse the collection and perform asynchronous operations for each
   * eachAsyncReverse(function(item,index,nextCallback){}) // traverse the collection and perform asynchronous operations for each in reverse direction
 
-Querying the collection | See more example at bottom
+###### Querying the collection | **See more examples at bottom**
 
-  * select(selector function)
-  * selectMulti(selector function)
-  * where(selector function)
-  * groupby(selector function)
-  * orderByAsc(comparator function)
-  * orderByDesc(comparator function)
-  * unique()
-  * top(count)
-  * bottom(count)
-  * range(fromIndex,toIndex)
+  * myList.select(selector function)
+  * myList.selectMulti(selector function)
+  * myList.where(selector function)
+  * myList.groupby(selector function)
+  * myList.orderByAsc(comparator function)
+  * myList.orderByDesc(comparator function)
+  * myList.unique()
+  * myList.top(count)
+  * myList.bottom(count)
+  * myList.range(fromIndex,toIndex)
 
-Static Functions | When you don't really need to convert an array to a List, So first argument of the functions below will be your array. 
+###### Static Functions | When you don't really need to convert an array to a List, So first argument of the functions below will be your array. 
 
   * List.extend(myArray); // Static Function | Extends an array to List in order to avail features of List
   * List.toList(myArray, isSelectKeys); OR List.toList(myObject, isSelectKeys); // Creates new List from an Array or values list of a normal object, pass isSelectKeys as true if you want to consider keys
