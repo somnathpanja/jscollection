@@ -1,7 +1,7 @@
 # jscollection
 [![Build Status](https://travis-ci.org/somnathpanja/jscollection.svg?branch=master)](https://travis-ci.org/somnathpanja/jscollection)
 
-A simple and powerful generic collection (List, Stack, Queue, FixedQueue) including power of LINQ for Javascript, node.js
+A simple and powerful generic javascript collection (List, Stack, Queue, FixedQueue) including power of LINQ for Javascript, node.js
 
 ## Installation
 
