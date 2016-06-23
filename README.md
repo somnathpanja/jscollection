@@ -1,7 +1,7 @@
 # jscollection
 [![Build Status](https://travis-ci.org/somnathpanja/jscollection.svg?branch=master)](https://travis-ci.org/somnathpanja/jscollection)
 
-A simple and powerful generic collection (List, Stack, Queue, FixedQueue) including power of LINQ for Javascript, node.js
+A simple and powerful generic javascript collection (List, Stack, Queue, FixedQueue) including power of LINQ for Javascript, node.js
 
 ## Installation
 
@@ -10,93 +10,94 @@ A simple and powerful generic collection (List, Stack, Queue, FixedQueue) includ
 ## List of functions
 
 ###### Basic functions
-   
-  * var myList = new List();
-  * myList.add(item)               // Add an item in collection
-  * myList.addRange(arrayOfItems)  // Add multiple items in collection
-  * myList.insertAt(index, item);  // Insert an item at a given position
-  * myList.removeAt(index);        // Remove an item from a given position also returns the deleted item
-  * myList.remove(item)            // Remove an item from collection also returns the deleted item
-  * myList.removeLast()            // Remove the last item from collection also returns the deleted item
-  * myList.removeAt(index)         // Remove an item at specific index from collection also returns the deleted item
-  * myList.first()                 // Get the first item from the collection, throws Index out of range exception if empty
-  * myList.last()                  // Get the last item from the collection, throws Index out of range exception if empty
-  * myList.count()                 // Get the size of the collection
-  * myList.any()                   // Is there any items present in collection? returns true/false
-  * myList.avg()                   // Calculate average of numeric values present in collection
-  * myList.sum()                   // Calculate sum of numeric values present in collection
-  * myList.reverse()               // Reversing the elements in an array
-  * myList.sort()                  // Sort items in collection
-  * myList.sort(compareFunction)   // Sort items in collection | http://www.w3schools.com/jsref/jsref_sort.asp#compareFunction
-
+```javascript
+* var myList = new List();
+* myList.add(item)               // Add an item in collection
+* myList.addRange(arrayOfItems)  // Add multiple items in collection
+* myList.insertAt(index, item);  // Insert an item at a given position
+* myList.removeAt(index);        // Remove an item from a given position also returns the deleted item
+* myList.remove(item)            // Remove an item from collection also returns the deleted item
+* myList.removeLast()            // Remove the last item from collection also returns the deleted item
+* myList.removeAt(index)         // Remove an item at specific index from collection also returns the deleted item
+* myList.first()                 // Get the first item from the collection, throws Index out of range exception if empty
+* myList.last()                  // Get the last item from the collection, throws Index out of range exception if empty
+* myList.count()                 // Get the size of the collection
+* myList.any()                   // Is there any items present in collection? returns true/false
+* myList.avg()                   // Calculate average of numeric values present in collection
+* myList.sum()                   // Calculate sum of numeric values present in collection
+* myList.reverse()               // Reversing the elements in an array
+* myList.sort()                  // Sort items in collection
+* myList.sort(compareFunction)   // Sort items in collection | http://www.w3schools.com/jsref/jsref_sort.asp#compareFunction
+```
 ###### Traversing the collection
-
-  * each(function)                 // Traverse the collection
-  * eachReverse(function)          // Traverse the collection in reverse way
-  * eachAsync(function(item,index,nextCallback){}) // traverse the collection and perform asynchronous operations for each
-  * eachAsyncReverse(function(item,index,nextCallback){}) // traverse the collection and perform asynchronous operations for each in reverse direction
-
+```javascript
+* myList.each(function)                 // Traverse the collection
+* myList.eachReverse(function)          // Traverse the collection in reverse way
+* myList.eachAsync(function(item,index,nextCallback){}) // traverse the collection and perform asynchronous operations for each
+* myList.eachAsyncReverse(function(item,index,nextCallback){}) // traverse the collection and perform asynchronous operations for each in reverse direction
+```
 ###### Querying the collection | **See more examples at bottom**
-
-  * myList.select(selector function)
-  * myList.selectMulti(selector function)
-  * myList.where(selector function)
-  * myList.groupby(selector function)
-  * myList.orderByAsc(comparator function)
-  * myList.orderByDesc(comparator function)
-  * myList.unique()
-  * myList.top(count)
-  * myList.bottom(count)
-  * myList.range(fromIndex,toIndex)
-
+```javascript
+* myList.select(selector function)
+* myList.selectMulti(selector function)
+* myList.where(selector function)
+* myList.groupby(selector function)
+* myList.orderByAsc(comparator function)
+* myList.orderByDesc(comparator function)
+* myList.unique()
+* myList.top(count)
+* myList.bottom(count)
+* myList.range(fromIndex,toIndex)
+```
 ###### Static Functions | When you don't really need to convert an array to a List, So first argument of the functions below will be your array. 
-
-  * List.extend(myArray); // Static Function | Extends an array to List in order to avail features of List
-  * List.toList(myArray, isSelectKeys); OR List.toList(myObject, isSelectKeys); // Creates new List from an Array or values list of a normal object, pass isSelectKeys as true if you want to consider keys
-  * List.printInConsole(); // Prints the data present in list in console | you can use it for debug purpose
-  * List.each(myArray, function)         // Traverse the collection
-  * List.eachReverse(myArray, function)  // Traverse the collection in reverse way
-  * List.eachAsync(myArray, function(item,index,nextCallback){}) // traverse the collection and perform asynchronous operations for each
-  * List.eachAsyncReverse(myArray, function(item,index,nextCallback){}) // traverse the collection and perform asynchronous operations for each in reverse direction
-  
+```javascript
+* List.extend(myArray); // Static Function | Extends an array to List in order to avail features of List
+* List.toList(myArray, isSelectKeys);
+* List.toList(myObject, isSelectKeys); // Creates new List from an Array or values list of a normal object, pass isSelectKeys as true if you want to consider keys
+* List.printInConsole(); // Prints the data present in list in console | you can use it for debug purpose
+* List.each(myArray, function)         // Traverse the collection
+* List.eachReverse(myArray, function)  // Traverse the collection in reverse way
+* List.eachAsync(myArray, function(item,index,nextCallback){}) // traverse the collection and perform asynchronous operations for each
+* List.eachAsyncReverse(myArray, function(item,index,nextCallback){}) // traverse the collection and perform asynchronous operations for each in reverse direction
+```
 ## How to use js collection? Example?
 
 ####Creating list
-
+```javascript
     var list = new List([1, 2, 3, 4]); 
     // OR
     var list = new List();
     list.addRange([1, 2, 3, 4]);
-
+```
 ####Adding Item to List
-
+```javascript
     var list = new List();
     list.add(1);
     list.add(2);
     list.add(3);
     list.add(4);
-
+```
 ####Lets add some objects
-
+```javascript
     // Lists of students as an example
     var list = new List([{name:"Jhon", marks: 80, class: 1}, 
                          {name:"Micle", marks: 91, class: 1}, 
                          {name:"Ritu", marks: 50, class: 2},
                          {name:"Sonia", marks: 50, class: 2}
                          ]);
-                         
+```
 ####Removing Item from List using remove(), removeLast(), removeAt() and clear()
-
+```javascript
     list.remove(item);
     var removedItem = list.removeLast();    // Removes the last item from collection
     var removedItem = list.removeAt(index); // Removes an item present at index
-
+```
 ####Delete or clear all items from collection using clear()
-
+```javascript
     list.clear();
-
+```
 ####Traversing a collection using each, eachReverse
-
+```javascript
     list.each(function(item, indexOfItem){
         console.log(item.name +':' + item.marks);
     });
@@ -104,9 +105,9 @@ A simple and powerful generic collection (List, Stack, Queue, FixedQueue) includ
      list.eachReverse(function(item, indexOfItem){
         console.log(item.name +':' + item.marks);
     });
-
+```
 #### Traversing a collection asynchronously using eachAsync, eachAsyncReverse
-
+```javascript
     list.eachAsync(function(item, indexOfItem, next){
         console.log(item.name +':' + item.marks);
         next();
@@ -116,36 +117,36 @@ A simple and powerful generic collection (List, Stack, Queue, FixedQueue) includ
         console.log(item.name +':' + item.marks);
         previous();
     });
-    
+```
 ####Break the loop while traversing through collection
-
+```javascript
     list.each(function(item, indexOfItem){
         console.log(item.name +':' + item.marks);
         if(indexOfItem == 3) return false; // Returning false will break the loop
     });
-    
+```
 ####Perform select query by key using select
-
+```javascript
     var names = list.select("name");
-        
+```
 ####Perform select query by selector function
-
+```javascript
     var names = list.select(function(t){return t.name;});
-
+```
 ####Perform where query (Select names of the student where markes >= 80)
-
+```javascript
     var names = list.where(function(t){return (t.marks >= 80);}).select('name');
-    
+```
 ####Perform groupby query in javascript
-
+```javascript
     /* According to above data set our result will be creting two groups. 
        One group where class=1 and another for class=2 */
     var groups = list.groupby('class'}); 
     // OR
     var groups = list.groupby(function(t){return t.class;});
-    
+```
 #### Execute asynchronous functions one after another
-
+```javascript
     List.exeAsync(function insertIntomongo(next){
             // Do operation in mongo
             next(datareturnedFromMongo); // once you are done call next
@@ -155,14 +156,14 @@ A simple and powerful generic collection (List, Stack, Queue, FixedQueue) includ
     }, function onDone(next, datareturnedFromOracle){
            // final call back here
     });
-        
+```
 #### Call a function N times asynchronously using loopAsync
-    
+```javascript
     list.loopAsync(N, function callMeNTimes(index, next){
         console.log('Called :' + index);
         next();
     });
-
+```
 #### * For more examples please Checkout jscollection/examples folder.
 
 ## Tests
