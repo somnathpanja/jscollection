@@ -1,5 +1,28 @@
+-------------
+1.0.9
+-------------
+IMPROVEMENTS
+1) List.each can traverse an objects | List.each(obj, function(val, key){---});
+2) List.eachReverse can traverse an objects | List.each(obj, function(val, key){---});
+3) List.eachAsync can traverse an objects | List.eachAsync(obj, function(val, key, next){---; next();});
+4) List.eachAsyncReverse can be traverse an objects | List.eachAsyncReverse(obj, function(val, key, next){---; next();});
+
+-------------
+Target 1.0.8
+-------------
+IMPROVEMENTS
+1) Beautify table print in console
+
+-------------
+Target 1.0.7
+-------------
+IMPROVEMENTS
+1) myList.printInConsole();
+1) myList.printInConsoleAsTable();
+
+-------------
 1.0.6
---------
+-------------
 BREAKING CHANGES
 1) eachFromLast() has been renamed to eachReverse()
 
@@ -10,4 +33,3 @@ IMPROVEMENTS
 ISSUES FIXED:
 1) Issue fixed with orderByAsc
 2) Issue fixed with orderByDesc
-

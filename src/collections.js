@@ -126,7 +126,7 @@
   /**
    * @description Delete an item present in a particular index
    * @param pIndex Index of the item to be removed
-   * @returns {T} Returns the item which was removed
+   * @returns {*} Returns the item which was removed
    */
   List.prototype.removeAt = function (pIndex) {
     this._doIndexAccess(pIndex);
@@ -295,7 +295,7 @@
 
   /**
    * @description Converts List to array
-   * @returns {Buffer|Array.<T>|string|Blob|ArrayBuffer}
+   * @returns {Buffer|Array.<*>|string|Blob|ArrayBuffer}
    */
   List.prototype.toArray = function () {
     return this.slice(0);
@@ -351,7 +351,7 @@
     var thisC = this;
     var list = instanceFactory(thisC);
     if ((typeof selector === 'string')) {
-      this.each(function (item, idx) {
+      this.each(function (item) {
         list.add(item[selector]);
       });
     } else if (selector) {
@@ -386,8 +386,8 @@
 
   /**
    * @description Write where condition in selector and where query returns what ever items are selected
-   * @param selector function(item){ return item."what to select";}
-   * @returns {*}
+   * @param conditionFunc function(item){ return item."what to select";}
+   * @returns {List}
    */
   List.prototype.where = function (conditionFunc) {
     var thisC = this;
@@ -513,9 +513,9 @@
       }).join(" │ ") + ' ' + rightChar;
 
     var line = new Array(header.length - 1).join('.─').split('.').join('');
-    console.log('├' +line + '╮');
+    console.log('├' + line + '╮');
     console.log(header);
-    console.log('├' +line + '┤');
+    console.log('├' + line + '┤');
 
     self.each(function (item) {
       var rowStr = leftChar + List.toList(item).select(function (txt, idx) {
@@ -536,7 +536,7 @@
       console.log(rowStr);
     });
 
-    console.log('╰' +line + '╯');
+    console.log('╰' + line + '╯');
     return this;
   };
 
@@ -555,105 +555,158 @@
   /**
    * @description loop for each item
    * @static Static method
-   * @param array
+   * @param arrayOrObj
    * @param cb
    * @param onDone
    */
-  List.each = function (array, cb, onDone) {
-    for (var i = 0; i < array.length; i++) {
-      if (cb(array[i], i) === false) {
-        break;
+  List.each = function (arrayOrObj, cb, onDone) {
+    if (Utils._isArray(arrayOrObj) || List.isList(arrayOrObj)) {
+      for (var i = 0; i < arrayOrObj.length; i++) {
+        if (cb(arrayOrObj[i], i) === false) {
+          break;
+        }
+      }
+    } else if (Utils._isObject(arrayOrObj)) {
+      for (var key in arrayOrObj) {
+        if (arrayOrObj.hasOwnProperty(key)) {
+          if (cb(arrayOrObj[key], key) === false) {
+            break;
+          }
+        }
       }
     }
 
     if (onDone) onDone();
-    return array;
+    return arrayOrObj;
   };
 
   /**
    * @description Loop through each items in reverse order
    * @static Static method
-   * @param array
+   * @param arrayOrObj
    * @param cb
    */
-  List.eachReverse = function (array, cb) {
-    for (var i = array.length - 1; i >= 0; i--) {
-      if (cb(array[i], i) === false) {
-        break;
+  List.eachReverse = function (arrayOrObj, cb) {
+    if (Utils._isArray(arrayOrObj) || List.isList(arrayOrObj)) {
+      for (var i = arrayOrObj.length - 1; i >= 0; i--) {
+        if (cb(arrayOrObj[i], i) === false) {
+          break;
+        }
+      }
+    } else if (Utils._isObject(arrayOrObj)) {
+      var keys = Object.keys(arrayOrObj);
+      for (var i = keys.length - 1; i >= 0; i--) {
+        if (cb(arrayOrObj[keys[i]], keys[i]) === false) {
+          break;
+        }
       }
     }
-    return array;
+    return arrayOrObj;
   };
 
   /**
    * @description loop for each item asynchronously
    * @static Static method
-   * @param array
+   * @param arrayOrObj
    * @param delegate function pointer to be called in loop params: (item, index, continueCallback)
    * @param onDone function will be called on loop end or any error occurred
    */
-  List.eachAsync = function (array, delegate, onDone) {
+  List.eachAsync = function (arrayOrObj, delegate, onDone) {
     try {
       var idx = -1;
-      var continueLoop = function () {
-        var err = arguments[0];
-
-        if (!err) {
-          if (++idx < array.length) {
-            delegate(array[idx], idx, continueLoop);
-          } else if (idx === array.length) {
+      var continueLoop;
+      if (Utils._isArray(arrayOrObj) || List.isList(arrayOrObj)) {
+        continueLoop = function () {
+          var err = arguments[0];
+          if (!err) {
+            if (++idx < arrayOrObj.length) {
+              delegate(arrayOrObj[idx], idx, continueLoop);
+            } else if (idx === arrayOrObj.length) {
+              if (onDone) onDone.apply(null, arguments);
+            }
+          } else {
             if (onDone) onDone.apply(null, arguments);
           }
-        } else {
-          if (onDone) onDone.apply(null, arguments);
-        }
-      };
+        };
+      } else if (Utils._isObject(arrayOrObj)) {
+        var keys = Object.keys(arrayOrObj);
+        continueLoop = function () {
+          var err = arguments[0];
 
+          if (!err) {
+            if (++idx < keys.length) {
+              delegate(arrayOrObj[keys[idx]], keys[idx], continueLoop);
+            } else if (idx === keys.length) {
+              if (onDone) onDone.apply(null, arguments);
+            }
+          } else {
+            if (onDone) onDone.apply(null, arguments);
+          }
+        };
+      }
       continueLoop(null);
     } catch (er) {
       if (onDone) onDone.apply(null, [er]);
     }
-    return array;
+    
+    return arrayOrObj;
   };
 
   /**
    * @description loop for each item in reverse order asynchronously
    * @static Static method
-   * @param array
+   * @param arrayOrObj
    * @param delegate function pointer to be called in loop params: (item, index, continueCallback)
    * @param onDone function will be called on loop end or any error occurred
    */
-  List.eachAsyncReverse = function (array, delegate, onDone) {
+  List.eachAsyncReverse = function (arrayOrObj, delegate, onDone) {
     try {
-      var idx = array.length;
-      var continueLoop = function () {
-        var err = arguments[0];
-
-        if (!err) {
-          if (--idx >= 0) {
-            delegate(array[idx], idx, continueLoop);
-          } else if (idx === -1) {
+      var idx, continueLoop;
+      if (Utils._isArray(arrayOrObj) || List.isList(arrayOrObj)) {
+        idx = arrayOrObj.length;
+        continueLoop = function () {
+          var err = arguments[0];
+          if (!err) {
+            if (--idx >= 0) {
+              delegate(arrayOrObj[idx], idx, continueLoop);
+            } else if (idx === -1) {
+              if (onDone) onDone.apply(null, arguments);
+            }
+          } else {
             if (onDone) onDone.apply(null, arguments);
           }
-        } else {
-          if (onDone) onDone.apply(null, arguments);
-        }
-      };
+        };
+      } else if (Utils._isObject(arrayOrObj)) {
+        var keys = Object.keys(arrayOrObj);
+        idx = keys.length;
+        continueLoop = function () {
+          var err = arguments[0];
+          if (!err) {
+            if (--idx >= 0) {
+              delegate(arrayOrObj[keys[idx]], keys[idx], continueLoop);
+            } else if (idx === -1) {
+              if (onDone) onDone.apply(null, arguments);
+            }
+          } else {
+            if (onDone) onDone.apply(null, arguments);
+          }
+        };
+      }
 
       continueLoop(null);
     } catch (er) {
       if (onDone) onDone.apply(null, [er]);
     }
-    return array;
+
+    return arrayOrObj;
   };
 
   /**
    * @description loop for nth iteration
    * @static Static method
-   * @param iteration Number of iteration
-   * @delegate function pointer to be called in loop params: (item, index, continueCallback)
-   * @onDone function will be called on loop end or any error occurred
-   * @param cb
+   * @param noOfIteration Number of iteration
+   * @param delegate function pointer to be called in loop params: (item, index, continueCallback)
+   * @param onDone function will be called on loop end or any error occurred
    */
   List.loopAsync = function (noOfIteration, delegate, onDone) {
     try {
@@ -761,7 +814,7 @@
 
   /**
    * @description Pop an item from Queue
-   * @returns {T}
+   * @returns {*}
    */
   Queue.prototype.popItem = function () {
     if (this.length > 0) {
@@ -836,6 +889,21 @@
     FixedQueue: FixedQueue
   };
 
+  var Utils = {
+    _toString: Object.prototype.toString,
+    _isFunction: function (f) {
+      return (f instanceof Function);
+    },
+    _isArray: Array.isArray || function (obj) {
+      return _toString.call(obj) === '[object Array]';
+    },
+    _isObject: function (obj) {
+      var type = typeof obj;
+      return type === 'function' || type === 'object' && !!obj;
+    }
+  };
+
   module.exports = Collections;
 
-})(module);
+})
+(module);
