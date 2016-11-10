@@ -436,17 +436,30 @@
     var thisC = this;
     var groups = {};
     this.each(function (item) {
-      var key = (typeof keySelector === 'string') ? item[keySelector] : keySelector(item);
+      var key, kIsObj = false;
+
+      if (Utils._isString(keySelector)) {
+        key = item[keySelector];
+      } else {
+        key = keySelector(item);
+        if (Utils._isObject(key)) {
+          key = JSON.stringify(key);
+          kIsObj = true;
+        }
+      }
+
       if (!groups[key]) {
         groups[key] = instanceFactory(thisC);
+        groups[key]._kIsObj = kIsObj;
       }
+
       groups[key].add(item);
     });
 
     var retList = instanceFactory(thisC);
     for (var key in groups) {
       if (groups.hasOwnProperty(key)) {
-        retList.add({key: key, value: groups[key]});
+        retList.add({key: (groups[key]._kIsObj ? JSON.parse(key) : key), value: groups[key]});
       }
     }
 
@@ -648,7 +661,7 @@
     } catch (er) {
       if (onDone) onDone.apply(null, [er]);
     }
-    
+
     return arrayOrObj;
   };
 
@@ -900,6 +913,9 @@
     _isObject: function (obj) {
       var type = typeof obj;
       return type === 'function' || type === 'object' && !!obj;
+    },
+    _isString: function (obj) {
+      return (typeof obj === 'string')
     }
   };
 

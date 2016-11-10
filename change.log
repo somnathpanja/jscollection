@@ -6,6 +6,11 @@ IMPROVEMENTS
 2) List.eachReverse can traverse an objects | List.each(obj, function(val, key){---});
 3) List.eachAsync can traverse an objects | List.eachAsync(obj, function(val, key, next){---; next();});
 4) List.eachAsyncReverse can be traverse an objects | List.eachAsyncReverse(obj, function(val, key, next){---; next();});
+5) groupBy works with normal object also
+
+list.groupBy(function(x){
+    return {name: x.name, class: x.class};
+});
 
 -------------
 Target 1.0.8
