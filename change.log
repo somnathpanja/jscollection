@@ -1,6 +1,12 @@
 -------------
 1.0.9
 -------------
+BUG FIX
+1) Index out of range for empty collection myList.printInConsoleAsTable();
+
+-------------
+1.0.9
+-------------
 IMPROVEMENTS
 1) List.each can traverse an objects | List.each(obj, function(val, key){---});
 2) List.eachReverse can traverse an objects | List.each(obj, function(val, key){---});

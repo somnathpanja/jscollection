@@ -500,7 +500,7 @@
    */
   List.prototype.printInConsoleAsTable = function () {
     var self = this;
-    var headers = List.toList(this.first(), true);
+    var headers = List.toList(this.length === 0 ? [] : this.first(), true);
 
     var tableInfo = headers.select(function (header) {
       return {
@@ -921,5 +921,4 @@
 
   module.exports = Collections;
 
-})
-(module);
+})(module);
