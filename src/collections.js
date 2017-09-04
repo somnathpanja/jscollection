@@ -343,6 +343,17 @@
   };
 
   /**
+   * @description Calculate average of all items except 0s present in the array or returned by selector or by key
+   * @param selector
+   * @returns {number}
+   */
+  List.prototype.avgBySkipZero = function (selector) {
+    return (this.length === 0) ? 0 : (this.sum(selector) / (this.length - this.select(function (v) {
+      return v === 0;
+    }).count()));
+  };
+
+  /**
    * @description Write select Query in Javascript in simple way, your selector function just returns what to select
    * @param selector function(item){ return item."what to select";}
    * @returns {*}
