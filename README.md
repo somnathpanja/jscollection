@@ -1,5 +1,5 @@
 # jscollection
-[![Build Status](https://travis-ci.org/somnathpanja/jscollection.svg?branch=master)](https://travis-ci.org/somnathpanja/jscollection)
+[![Build Status](https://travis-ci.org/somnathpanja/jscollection.svg?branch=master)](https://travis-ci.org/somnathpanja/jscollection) [![Coverage Status](https://coveralls.io/repos/github/somnathpanja/jscollection/badge.svg?branch=master)](https://coveralls.io/github/somnathpanja/jscollection?branch=master)
 
 A simple and powerful generic javascript collection (List, Stack, Queue, FixedQueue) including power of LINQ for Javascript, node.js
 
