@@ -522,19 +522,19 @@
     });
     var leftChar = "│", rightChar = "│";
     var header = leftChar + tableInfo.select(function (header) {
-        var noOfSpaceReq = header.maxWidth - header.headerTxt.length;
-        var str = ' ' + header.headerTxt;
+      var noOfSpaceReq = header.maxWidth - header.headerTxt.length;
+      var str = ' ' + header.headerTxt;
 
-        if (noOfSpaceReq == 1) {
-          str += ' ';
-        } else if (noOfSpaceReq == 0) {
-        } else {
-          var emptyStr = new Array(noOfSpaceReq + 1).join('. ').split('.');
-          str += emptyStr.join('');
-        }
+      if (noOfSpaceReq == 1) {
+        str += ' ';
+      } else if (noOfSpaceReq == 0) {
+      } else {
+        var emptyStr = new Array(noOfSpaceReq + 1).join('. ').split('.');
+        str += emptyStr.join('');
+      }
 
-        return str;
-      }).join(" │ ") + ' ' + rightChar;
+      return str;
+    }).join(" │ ") + ' ' + rightChar;
 
     var line = new Array(header.length - 1).join('.─').split('.').join('');
     console.log('├' + line + '╮');
@@ -543,20 +543,20 @@
 
     self.each(function (item) {
       var rowStr = leftChar + List.toList(item).select(function (txt, idx) {
-          txt = Array.isArray(txt) ? txt.join(',') : ((typeof txt === 'object') ? JSON.stringify(txt) : txt.toString());
-          var header = tableInfo[idx];
-          var noOfSpaceReq = header.maxWidth - txt.length;
-          var str = ' ' + txt;
+        txt = Array.isArray(txt) ? txt.join(',') : ((typeof txt === 'object') ? JSON.stringify(txt) : txt.toString());
+        var header = tableInfo[idx];
+        var noOfSpaceReq = header.maxWidth - txt.length;
+        var str = ' ' + txt;
 
-          if (noOfSpaceReq == 1) {
-            str += ' ';
-          } else if (noOfSpaceReq == 0) {
-          } else {
-            var emptyStr = new Array(noOfSpaceReq + 1).join('. ').split('.');
-            str += emptyStr.join('');
-          }
-          return str;
-        }).join(' │ ') + ' ' + rightChar;
+        if (noOfSpaceReq == 1) {
+          str += ' ';
+        } else if (noOfSpaceReq == 0) {
+        } else {
+          var emptyStr = new Array(noOfSpaceReq + 1).join('. ').split('.');
+          str += emptyStr.join('');
+        }
+        return str;
+      }).join(' │ ') + ' ' + rightChar;
       console.log(rowStr);
     });
 
@@ -730,6 +730,7 @@
    * @static Static method
    * @param noOfIteration Number of iteration
    * @param delegate function pointer to be called in loop params: (item, index, continueCallback)
+   *        continueCallback(err, break); should be called like this.
    * @param onDone function will be called on loop end or any error occurred
    */
   List.loopAsync = function (noOfIteration, delegate, onDone) {
@@ -771,9 +772,7 @@
       idx++;
       if (idx < len) {
         var args = [continueLoop];
-        for (var id = 0; id < arguments.length; id++)
-          args.push(arguments[id]);
-
+        Array.prototype.push.apply(args, arguments);
         delegates[idx].apply(null, args);
       }
     };
@@ -781,6 +780,61 @@
     continueLoop();
   };
 
+  /**
+   * Execute unlimited functions sequentially & asynchronously
+   * @example List.exeAsync(f1, f2, f3);
+   */
+  List.sequentialExe = function () {
+    var delegates = arguments;
+    /// DEF:delegates, are function pointers.
+    var idx = -1;
+    var len = delegates.length;
+    var onDone = delegates[--len];
+
+    var continueLoop = function () {
+      idx++;
+      var err = arguments[0];
+
+      if (err) {
+        onDone(err);
+        return;
+      }
+
+      if (idx < len) {
+        var args = Array.prototype.slice.call(arguments);
+        args.shift(); // removing err as first item
+        args.unshift(continueLoop); // adding first item
+        delegates[idx].apply(null, args);
+      }
+    };
+
+    continueLoop();
+  };
+
+  /**
+   * Execute unlimited functions asynchronously
+   * @example List.exeAsync(params1, f1, params2, f2, f3, f4, params5, f5, onDone);
+   */
+  List.parallelExe = function () {
+    var delegates = arguments;
+    /// DEF:delegates, are function pointers.
+    var idx = 0,
+      len = delegates.length,
+      onDone = delegates[--len], results = [], err;
+
+    var fnReturn = function () {
+      err = err || arguments[0]; // last occurred error
+      results.push(Array.prototype.slice.call(arguments));
+      if (idx === len) onDone(err, results);
+    };
+
+    for (; idx < len; idx++) {
+      var params = Array.isArray(delegates[idx]) ? delegates[idx++] : [];
+      var args = [fnReturn];
+      Array.prototype.push.apply(args, params);
+      delegates[idx].apply(null, args);
+    }
+  };
 
   /**
    * returns list of values extracted from array or object property values or keys

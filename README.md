@@ -145,7 +145,7 @@ A simple and powerful generic javascript collection (List, Stack, Queue, FixedQu
     // OR
     var groups = list.groupby(function(t){return t.class;});
 ```
-#### Execute asynchronous functions one after another
+#### Execute asynchronous functions one after another without caring about error
 ```javascript
     List.exeAsync(function insertIntomongo(next){
             // Do operation in mongo
@@ -157,11 +157,40 @@ A simple and powerful generic javascript collection (List, Stack, Queue, FixedQu
            // final call back here
     });
 ```
+#### For better error handling, execute unlimited functions sequentially & asynchronously using sequentialExe
+```javascript
+    List.sequentialExe(function insertIntomongo(next){
+            // Do operation in mongo
+            next(error, datareturnedFromMongo); // once you are done call next
+    }, function insertIntoOracle(next, datareturnedFromMongo){
+            // Do operation in oracle
+            next(error, datareturnedFromOracle); // // once you are done call next
+    }, function onDone(error){
+           // final call back here
+           // Any error in any function will skip next function and directly comes to onDone function
+    });
+```
+#### Execute unlimited functions in parallel (asynchronously) using parallelExe
+```javascript
+    List.parallelExe(function insertIntomongo(next){
+            // Do operation in mongo
+            next(datareturnedFromMongo); // once you are done call next
+    }, function insertIntoOracle(next, datareturnedFromMongo){
+            // Do operation in oracle
+            next(datareturnedFromOracle); // // once you are done call next
+    }, function onDone(next, results){
+           // final call back here
+           // err is nothing but the latest occurred error. results will contain output from all the executed functions
+           So results = [[mongoError, datareturnedFromMongo],[oracleError, datareturnedFromOracle]];
+    });
+```
 #### Call a function N times asynchronously using loopAsync
 ```javascript
     list.loopAsync(N, function callMeNTimes(index, next){
         console.log('Called :' + index);
-        next();
+        next(err, break);  // you can pass break = true to break the loop
+    }, onDone(err){
+         // if break is called or any error occurred then onDone function will be called
     });
 ```
 #### * For more examples please Checkout jscollection/examples folder.
