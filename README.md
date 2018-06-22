@@ -8,7 +8,7 @@ A simple and powerful generic javascript collection (List, Stack, Queue, FixedQu
 
   npm install jscollection
 
-# WHATS NEW in v10.0.15 (23/05/2018)
+# WHATS NEW in v1.1.0 (23/06/2018)
 
 ##### List.sequentialExe: For better error handling, execute unlimited functions sequentially & asynchronously using sequentialExe
 ##### List.sequentialExe: Execute unlimited functions in parallel (asynchronously) using parallelExe
