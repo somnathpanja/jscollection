@@ -203,6 +203,7 @@ A simple and powerful generic javascript collection (List, Stack, Queue, FixedQu
 ## Tests
 
   npm test
+  install list "chai": "^3.5.0", "mocha": "^2.5.1"
 
 ## Authors and Contributors
 

@@ -1,6 +1,6 @@
 {
   "name": "jscollection",
-  "version": "1.0.15",
+  "version": "1.1.0",
   "description": "A powerful collection Array, List, Stack, Queue, FixedQueue with power of LINQ for Javascript, node.js",
   "main": "index.js",
   "directories": {
@@ -27,6 +27,8 @@
   },
   "homepage": "https://github.com/somnathpanja/jscollection#readme",
   "dependencies": {
+  },
+  "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^2.5.1"
   }
