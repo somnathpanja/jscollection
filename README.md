@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/somnathpanja/jscollection.svg?branch=master)](https://travis-ci.org/somnathpanja/jscollection)
 <span class="badge-npmversion"><a href="https://npmjs.org/package/jscollection" title="View this project on NPM"><img src="https://img.shields.io/npm/v/jscollection.svg" alt="NPM version" /></a></span>
 <span class="badge-npmdownloads"><a href="https://npmjs.org/package/jscollection" title="View this project on NPM"><img src="https://img.shields.io/npm/dm/jscollection.svg" alt="NPM downloads" /></a></span>
+<br>
 # A simple and powerful generic javascript collection (List, Stack, Queue, FixedQueue) including power of LINQ for Javascript, node.js
 
 ## Installation
